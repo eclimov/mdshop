@@ -1,0 +1,33 @@
+version: "3.1"
+services:
+    mysql:
+        image: mysql:5.7
+        container_name: mdshop-mysql
+        working_dir: /application
+        volumes:
+            - .:/application
+        environment:
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        ports:
+            - 3306:3306
+
+    webserver:
+        image: nginx:alpine
+        container_name: mdshop-webserver
+        working_dir: /application
+        volumes:
+            - .:/application
+            - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+        ports:
+            - 80:80
+
+    php-fpm:
+        build: docker/php-fpm
+        container_name: mdshop-php-fpm
+        working_dir: /application
+        volumes:
+            - .:/application
+            - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
