@@ -24,4 +24,7 @@ jobs:
             docker login -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PWD
             docker push $DOCKER_HUB_USER_ID/mdshop:$CIRCLE_SHA1
             docker push $DOCKER_HUB_USER_ID/mdshop:latest
-
+      - deploy:
+          name: Deploy applocation to Digital Ocean
+          command: |
+            ssh -o "StrictHostKeyChecking no" $DEPLOY_USER@$DEPLOY_HOST "cd /opt/mdshop && docker-compose -f docker-compose.prod.yml pull php-fpm && docker-compose -f docker-compose.prod.yml up -d --build --force-recreate php-fpm"
