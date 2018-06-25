@@ -9,13 +9,13 @@ jobs:
       - setup_remote_docker
 
       - run:
-        name: Install dependencies
-        command: |
-          apk add --no-cache py-pip=9.0.1-r1
-          pip install docker-compose==1.19.0
+          name: Install dependencies
+          command: |
+            apk add --no-cache py-pip=9.0.1-r1
+            pip install docker-compose==1.19.0
       - run:
-        name: Build containers and push application to Docker Hub
-        command: |
+          name: Build containers and push application to Docker Hub
+          command: |
             docker-compose -f docker-compose.ci.yml up -d --build --force-recreate
             docker-compose -f docker-compose.ci.yml ps
             docker commit jobeet-php-fpm ksardas/mdshop:$CIRCLE_SHA1
@@ -25,6 +25,6 @@ jobs:
             docker push $DOCKER_HUB_USER_ID/mdshop:$CIRCLE_SHA1
             docker push $DOCKER_HUB_USER_ID/mdshop:latest
       - deploy:
-        name: Deploy applocation to Digital Ocean
-        command: |
-          ssh -o "StrictHostKeyChecking no" $DEPLOY_USER@$DEPLOY_HOST "cd /opt/mdshop && docker-compose -f docker-compose.prod.yml pull php-fpm && docker-compose -f docker-compose.prod.yml up -d --build --force-recreate php-fpm"
+          name: Deploy applocation to Digital Ocean
+          command: |
+            ssh -o "StrictHostKeyChecking no" $DEPLOY_USER@$DEPLOY_HOST "cd /opt/mdshop && docker-compose -f docker-compose.prod.yml pull php-fpm && docker-compose -f docker-compose.prod.yml up -d --build --force-recreate php-fpm"
