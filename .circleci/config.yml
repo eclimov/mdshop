@@ -1,0 +1,30 @@
+version: 2
+jobs:
+  build:
+    working_directory: /dockerapp
+    docker:
+      - image: docker:18.05.0-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+
+      - run:
+        name: Install dependencies
+        command: |
+          apk add --no-cache py-pip=9.0.1-r1
+          pip install docker-compose==1.19.0
+      - run:
+        name: Build containers and push application to Docker Hub
+        command: |
+          docker-compose -f docker-compose.ci.yml up -d --build --force-recreate
+          docker-compose -f docker-compose.ci.yml ps
+          docker commit jobeet-php-fpm gregurco/jobeet:$CIRCLE_SHA1
+          docker commit jobeet-php-fpm gregurco/jobeet:latest
+          docker images
+          docker login -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PWD
+          docker push $DOCKER_HUB_USER_ID/jobeet:$CIRCLE_SHA1
+          docker push $DOCKER_HUB_USER_ID/jobeet:latest
+      - deploy:
+        name: Deploy applocation to Digital Ocean
+        command: |
+          ssh -o "StrictHostKeyChecking no" $DEPLOY_USER@$DEPLOY_HOST "cd /opt/jobeet && docker-compose -f docker-compose.prod.yml pull php-fpm && docker-compose -f docker-compose.prod.yml up -d --build --force-recreate php-fpm"
