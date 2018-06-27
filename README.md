@@ -19,7 +19,10 @@
 `sudo apt-get install git`    
 6 Check out SSH instructions:  
 https://medium.com/@lewdaly/circleci-docker-digital-ocean-409628f5a428  
-7 Reboot  
+7 Install npm  
+`apt install npm`  
+within project's directory: `npm install`  
+8 Reboot  
 `sudo shutdown -r now`
 
 2. On LM:  
