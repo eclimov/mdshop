@@ -22,7 +22,10 @@ https://medium.com/@lewdaly/circleci-docker-digital-ocean-409628f5a428
 7 Install npm  
 `apt install npm`  
 within project's directory: `npm install`  
-8 Reboot  
+8 Install composer  
+`apt install composer`  
+within project's directory: `composer install`  
+9 Reboot  
 `sudo shutdown -r now`
 
 2. On LM:  
