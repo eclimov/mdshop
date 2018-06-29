@@ -32,3 +32,7 @@ within project's directory: `composer install`
 1 Install pbcopy  
 `sudo apt-get install -y xclip`  
 `alias pbcopy="xclip -sel clip"`
+
+
+# Not showing anything:
+bin/console debug:router --env=prod
