@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CompanyController extends Controller {
 
     /**
-     * @Route("/{company}", name="show", requirements={"company" = "\d+"}, defaults={"company": 1})
+     * @Route("/", name="show")
      * @Method("GET")
      * @return Response
      */
