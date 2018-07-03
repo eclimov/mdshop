@@ -22,8 +22,6 @@ class InvoiceController extends Controller {
      */
     public function  create(Request $request, EntityManagerInterface $em): Response
     {
-
-
         return $this->render('base.html.twig');
     }
 }
