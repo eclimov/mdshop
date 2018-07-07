@@ -2,6 +2,8 @@
 namespace App\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,6 +25,149 @@ class Company{
      * @ORM\Column(type="string", length=255)
      */
     private $name;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     */
+    private $iban;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     */
+    private $fiscalCode;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     */
+    private $vat;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="App\Entity\CompanyAddress", mappedBy="company")
+     */
+    private $addresses;
+
+    /**
+     * @var BankAffiliate
+     * @ORM\ManyToOne(targetEntity="App\Entity\BankAffiliate", inversedBy="companies")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $bankAffiliate;
+
+    public function __construct()
+    {
+        $this->addresses = new ArrayCollection();
+    }
+
+    /**
+     * @param CompanyAddress $address
+     * @return Company
+     */
+    public function addAddress(CompanyAddress $address): Company
+    {
+        if(!$this->addresses->contains($address)) {
+            $this->addresses->add($address);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param CompanyAddress $address
+     * @return Company
+     */
+    public function removeAddress(CompanyAddress $address): Company
+    {
+        $this->addresses->removeElement($address);
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIban(): string
+    {
+        return $this->iban;
+    }
+
+    /**
+     * @param string $iban
+     * @return Company
+     */
+    public function setIban(string $iban): Company
+    {
+        $this->iban = $iban;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFiscalCode(): string
+    {
+        return $this->fiscalCode;
+    }
+
+    /**
+     * @param string $fiscalCode
+     * @return Company
+     */
+    public function setFiscalCode(string $fiscalCode): Company
+    {
+        $this->fiscalCode = $fiscalCode;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVat(): string
+    {
+        return $this->vat;
+    }
+
+    /**
+     * @param string $vat
+     * @return Company
+     */
+    public function setVat(string $vat): Company
+    {
+        $this->vat = $vat;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CompanyAddress[]
+     */
+    public function getAddresses(): Collection
+    {
+        return $this->addresses;
+    }
+
+    /**
+     * @return BankAffiliate
+     */
+    public function getBankAffiliate(): BankAffiliate
+    {
+        return $this->bankAffiliate;
+    }
+
+    /**
+     * @param BankAffiliate $bankAffiliate
+     * @return Company
+     */
+    public function setBankAffiliate(BankAffiliate $bankAffiliate): Company
+    {
+        $this->bankAffiliate = $bankAffiliate;
+
+        return $this;
+    }
 
     /**
      * @var datetime
@@ -77,13 +222,10 @@ class Company{
     }
 
     /**
-     * @param DateTime $createdAt
-     * @return Company
+     * @ORM\PrePersist()
      */
-    public function setCreatedAt(DateTime $createdAt): Company
+    public function prePersist(): void
     {
-        $this->createdAt = $createdAt;
-
-        return $this;
+        $this->createdAt = new \DateTime();
     }
 }

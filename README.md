@@ -26,13 +26,11 @@ within project's directory: `npm install`
 `apt install composer`  
 within project's directory: `composer install`  
 9 Reboot  
-`sudo shutdown -r now`
+`sudo shutdown -r now`  
+10 Check router:  
+`bin/console debug:router --env=prod`
 
 2. On LM:  
 1 Install pbcopy  
 `sudo apt-get install -y xclip`  
 `alias pbcopy="xclip -sel clip"`
-
-
-# Not showing anything:
-bin/console debug:router --env=prod
