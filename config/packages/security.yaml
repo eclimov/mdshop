@@ -19,11 +19,13 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            pattern: ^/
             provider: in_memory
             anonymous: ~
             form_login:
                 login_path: security.login
                 check_path: security.login
+            logout: true
 
             # activate different ways to authenticate
 
@@ -37,10 +39,14 @@ security:
         Symfony\Component\Security\Core\User\User:
             algorithm: bcrypt
 
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        #- { path: ^/, roles: ROLE_ADMIN }
+        - { path: ^/, roles: ROLE_USER }
