@@ -28,7 +28,9 @@ within project's directory: `composer install`
 9 Reboot  
 `sudo shutdown -r now`  
 10 Check router:  
-`bin/console debug:router --env=prod`
+`bin/console debug:router --env=prod`  
+11 Add swap memory  
+`https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-16-04`
 
 2. On LM:  
 1 Install pbcopy  
