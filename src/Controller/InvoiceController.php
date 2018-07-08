@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 /**
  * @Route(name="invoice.")
  */
-class InvoiceController extends Controller {
+class InvoiceController extends AbstractController {
     /**
      * @Route("invoice/create", name="create")
      * @Method({"GET", "POST"})

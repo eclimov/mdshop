@@ -1,13 +1,29 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory: { memory: ~ }
+        chain_provider:
+            chain:
+                providers: [in_memory, user_db]
+        in_memory:
+            memory:
+                users:
+                    t1:
+                        # 'bin/console security:encode-password' to get encoded hardcode
+                        password: $2y$13$TVYGaBVdCJcEfRKhncRGre9TvZobwmmOE88QHaRiqXK3CCeaWcOLq
+                        roles: 'ROLE_ADMIN'
+        user_db:
+            entity:
+                class: App\Entity\User
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
+            provider: in_memory
+            anonymous: ~
+            form_login:
+                login_path: security.login
+                check_path: security.login
 
             # activate different ways to authenticate
 
@@ -17,8 +33,14 @@ security:
             # form_login: true
             # https://symfony.com/doc/current/security/form_login_setup.html
 
+    encoders:
+        Symfony\Component\Security\Core\User\User:
+            algorithm: bcrypt
+
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_ADMIN }
