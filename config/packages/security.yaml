@@ -20,8 +20,7 @@ security:
             security: false
         main:
             pattern: ^/
-            # provider: in_memory
-            provider: user_db
+            provider: in_memory
             anonymous: ~
             form_login:
                 login_path: security.login
