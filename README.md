@@ -30,7 +30,9 @@ within project's directory: `composer install`
 10 Check router:  
 `bin/console debug:router --env=prod`  
 11 Add swap memory  
-`https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-16-04`
+`https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-16-04`  
+12 Add permissions to log folder (from within container)  
+`chmod -R 777 var/log/`
 
 2. On LM:  
 1 Install pbcopy  
