@@ -14,3 +14,5 @@ RUN apt-get update \
 RUN APP_ENV=prod composer install --no-dev --optimize-autoloader
 
 RUN APP_ENV=prod bin/console cache:warmup
+
+# https://github.com/denderello/symfony-docker-example/issues/2
