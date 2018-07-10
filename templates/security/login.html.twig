@@ -8,19 +8,19 @@
     {% endif %}
 
     <form action="{{ path('security.login') }}" method="post">
-    {#<form action="{{ url('security.login') }}" method="post">#}
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" />
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password" />
-
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" />
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="_password" />
+        </div>
         {#
             If you want to control the URL the user
             is redirected to on success (more details below)
             <input type="hidden" name="_target_path" value="/account" />
         #}
-
-        <button type="submit">login</button>
+        <button type="submit" class="btn btn-outline-dark">login</button>
     </form>
 {% endblock %}

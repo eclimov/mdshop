@@ -13,7 +13,10 @@ RUN apt-get update \
 
 RUN APP_ENV=prod composer install --no-dev --optimize-autoloader
 
+# Waming-up cache
 RUN APP_ENV=prod bin/console cache:warmup
+
+# Providing write permissions
 RUN APP_ENV=prod chmod -R 777 var/
 
 # https://github.com/denderello/symfony-docker-example/issues/2
