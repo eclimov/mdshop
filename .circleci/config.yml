@@ -17,6 +17,7 @@ jobs:
           name: Build containers and push application to Docker Hub
           command: |
             docker-compose -f docker-compose.ci.yml up -d --build --force-recreate
+            docker-compose run chmod -R 777 var/
             docker-compose -f docker-compose.ci.yml ps
             docker commit mdshop-php-fpm ksardas/mdshop:$CIRCLE_SHA1
             docker commit mdshop-php-fpm ksardas/mdshop:latest
@@ -28,4 +29,4 @@ jobs:
           name: Deploy applocation to Digital Ocean
           #Use 'docker-compose logs -f -t' to attach yourself to the logs of all running services
           command: |
-            ssh -o "StrictHostKeyChecking no" $DEPLOY_USER@$DEPLOY_HOST "cd /opt/mdshop && docker-compose -f docker-compose.prod.yml pull php-fpm && docker-compose -f docker-compose.prod.yml up -d --build --force-recreate php-fpm && chmod -R 777 var/"
+            ssh -o "StrictHostKeyChecking no" $DEPLOY_USER@$DEPLOY_HOST "cd /opt/mdshop && docker-compose -f docker-compose.prod.yml pull php-fpm && docker-compose -f docker-compose.prod.yml up -d --build --force-recreate php-fpm"
