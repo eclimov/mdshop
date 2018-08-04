@@ -1,0 +1,30 @@
+<a href="{{ url('bankAffiliate.create', {id: bank.id}) }}" class="btn btn-dark ml-auto">Add new affiliate</a>
+<div class="container mt-3 mb-4">
+    <table class="table table-hover table-sm">
+        <tr class="thead-dark">
+            <th>Number</th>
+            <th style="text-align: center;">Actions</th>
+        </tr>
+        {% for affiliate in bank.affiliates %}
+            <tr>
+                <td>
+                    {{ affiliate.affiliateNumber }}
+                </td>
+                <td style="text-align: center;">
+                    <div>
+                        <a href="{{ url('bankAffiliate.edit', {id: affiliate.id}) }}" style="margin: 5px; text-decoration: none;">
+                            <button type="button" class="btn btn-secondary" title="Edit">
+                                <span class="octicon octicon-pencil"></span>
+                            </button>
+                        </a>
+                        <form action="{{ url('bankAffiliate.delete', {id: affiliate.id}) }}" method="post" style="margin: 5px; display: inline;">
+                            <button type="submit" class="btn btn-danger" title="Delete" onclick="return confirm('Are you sure you want to delete this affiliate?');">
+                                <span class="octicon octicon-trashcan"></span>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>

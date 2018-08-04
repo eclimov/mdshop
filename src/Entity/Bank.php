@@ -30,7 +30,7 @@ class Bank
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="App\Entity\BankAffiliate", mappedBy="bank")
+     * @ORM\OneToMany(targetEntity="App\Entity\BankAffiliate", mappedBy="bank", cascade={"remove"})
      */
     private $affiliates;
 
@@ -65,9 +65,9 @@ class Bank
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }

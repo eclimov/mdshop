@@ -15,6 +15,17 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class InvoiceController extends AbstractController {
     /**
+     * @Route("/", name="list")
+     * @Method("GET")
+     * @return Response
+     * @throws \LogicException
+     */
+    public function list(): Response
+    {
+        return $this->render('base.html.twig');
+    }
+
+    /**
      * @Route("invoice/create", name="create")
      * @Method({"GET", "POST"})
      * @param Request $request

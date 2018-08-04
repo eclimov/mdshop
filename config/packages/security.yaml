@@ -25,7 +25,9 @@ security:
             form_login:
                 login_path: security.login
                 check_path: security.login
-            logout: true
+            logout:
+                path:   /logout
+                target: /
 
             # activate different ways to authenticate
 
@@ -36,9 +38,7 @@ security:
             # https://symfony.com/doc/current/security/form_login_setup.html
 
     encoders:
-        Symfony\Component\Security\Core\User\User:
-            algorithm: bcrypt
-        my_encoder:
+        App\Entity\User:
             algorithm: bcrypt
 
     role_hierarchy:

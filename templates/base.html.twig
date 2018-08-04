@@ -6,12 +6,20 @@
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/4.4.0/font/octicons.min.css">
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">Artprezent</a>
-        <a href="{{ url('invoice.create') }}" class="btn btn-light ml-auto">Create Invoice</a>
+        <a class="navbar-brand" href="/">Logo</a>
+        {% if app.user %}
+            <a href="{{ url('company.list') }}" class="btn btn-link">Companies</a>
+            <a href="{{ url('bank.list') }}" class="btn btn-link">Banks</a>
+            <a href="{{ url('user.list') }}" class="btn btn-link">Users</a>
+            <a href="{{ path('logout') }}" class="btn btn-light ml-auto">Logout</a>
+        {% else %}
+            {# not logged #}
+        {% endif %}
     </nav>
 
     <div class="container mt-3 mb-4">

@@ -1,0 +1,7 @@
+.tool-bar {
+    display: flex;
+}
+
+.tool-bar > * {
+    padding-right: 5px;
+}

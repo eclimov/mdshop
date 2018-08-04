@@ -3,14 +3,19 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(fields="email", message="Email already taken")
+ * @UniqueEntity(fields="username", message="Username already taken")
  * @ORM\Table(name="users")
+ * @ORM\HasLifecycleCallbacks()
  */
-class User implements UserInterface, \Serializable, EncoderAwareInterface
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Column(type="integer")
@@ -39,9 +44,23 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
      */
     private $isActive;
 
+    /**
+     * @var datetime
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $createdAt;
+
     public function __construct()
     {
         $this->isActive = true;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getCreatedAt(): DateTime
+    {
+        return $this->createdAt;
     }
 
     public function getUsername()
@@ -124,15 +143,26 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     }
 
     /**
-     * Gets the name of the encoder used to encode the password.
-     *
-     * If the method returns null, the standard way to retrieve the encoder
-     * will be used instead.
-     *
-     * @return string
+     * @return mixed
      */
-    public function getEncoderName()
+    public function getEmail()
     {
-        return 'my_encoder';
+        return $this->email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function prePersist(): void
+    {
+        $this->createdAt = new \DateTime();
     }
 }

@@ -53,7 +53,7 @@ class Company{
     /**
      * @var BankAffiliate
      * @ORM\ManyToOne(targetEntity="App\Entity\BankAffiliate", inversedBy="companies")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $bankAffiliate;
 

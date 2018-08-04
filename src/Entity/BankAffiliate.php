@@ -24,8 +24,8 @@ class BankAffiliate
 
     /**
      * @var Bank
-     * @ORM\ManyToOne(targetEntity="App\Entity\Bank", inversedBy="affiliates")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Bank", inversedBy="affiliates", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
      */
     private $bank;
 
@@ -122,9 +122,9 @@ class BankAffiliate
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAffiliateNumber(): string
+    public function getAffiliateNumber(): ?string
     {
         return $this->affiliateNumber;
     }
