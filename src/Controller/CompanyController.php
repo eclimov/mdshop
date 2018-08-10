@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Company;
+use App\Form\CompanyType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,6 +34,22 @@ class CompanyController extends AbstractController {
     }
 
     /**
+     * @Route("company/{id}", name="view", requirements={"id" = "\d+"})
+     * @Method("GET")
+     * @param Company $company
+     * @return Response
+     */
+    public function view(Company $company): Response
+    {
+        $deleteForm = $this->createDeleteForm($company);
+
+        return $this->render('company/show.html.twig', [
+            'company' => $company,
+            'deleteForm' => $deleteForm->createView(),
+        ]);
+    }
+
+    /**
      * @Route("company/create", name="create")
      * @Method({"GET", "POST"})
      * @param Request $request
@@ -40,23 +58,22 @@ class CompanyController extends AbstractController {
      */
     public function create(Request $request, EntityManagerInterface $em): Response
     {
-        $job = new Company();
-        $form = $this->createForm(JobType::class, $job);
+        $company = new Company();
+        $form = $this->createForm(CompanyType::class, $company);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($job);
+            $em->persist($company);
             $em->flush();
 
-            $this->addFlash('notice', 'Job has been created');
+            $this->addFlash('notice', 'Company has been created');
 
             return $this->redirectToRoute(
-                'job.view',
-                ['token' => $job->getToken(),]
+                'company.list'
             );
         }
 
-        return $this->render('job/create.html.twig', [
+        return $this->render('company/create.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -88,6 +105,33 @@ class CompanyController extends AbstractController {
      */
     public function edit(Request $request, Company $company, EntityManagerInterface $em): Response
     {
-        return $this->render('base.html.twig');
+        $form = $this->createForm(CompanyType::class, $company);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+
+            $this->addFlash('notice', 'Company info has been updated');
+
+            return $this->redirectToRoute(
+                'company.list'
+            );
+        }
+
+        return $this->render('company/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @param Company $company
+     * @return FormInterface
+     */
+    public function createDeleteForm(Company $company): FormInterface
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('company.delete', ['id' => $company->getId()]))
+            ->setMethod('DELETE')
+            ->getForm();
     }
 }

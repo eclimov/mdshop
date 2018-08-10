@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ company.name }}{% endblock %}
+
+{% block body %}
+    {% include 'toolbar.html.twig' with {
+        'deleteForm': deleteForm,
+        'urlEdit': url('company.edit', {id: company.id})
+    } %}
+    <h class="display-4">{{ company.name }}</h>
+    <p>Affiliate number: {{ company.bankAffiliate.affiliateNumber }}</p>
+    <p>Fiscal code: {{ company.fiscalCode }}</p>
+    <p>IBAN: {{ company.iban }}</p>
+    <p>VAT: {{ company.vat }}</p>
+    <p>Created at: {{ company.createdAt|date("d/m/Y") }}</p>
+    {% include 'companyAddress/list.html.twig' with {
+        'company': company,
+    } %}
+{% endblock %}

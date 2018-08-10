@@ -56,9 +56,9 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return DateTime
+     * @return DateTime|null
      */
-    public function getCreatedAt(): DateTime
+    public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt;
     }

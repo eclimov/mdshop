@@ -86,9 +86,9 @@ class Company{
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getIban(): string
+    public function getIban(): ?string
     {
         return $this->iban;
     }
@@ -105,9 +105,9 @@ class Company{
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFiscalCode(): string
+    public function getFiscalCode(): ?string
     {
         return $this->fiscalCode;
     }
@@ -124,9 +124,9 @@ class Company{
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getVat(): string
+    public function getVat(): ?string
     {
         return $this->vat;
     }
@@ -151,9 +151,9 @@ class Company{
     }
 
     /**
-     * @return BankAffiliate
+     * @return BankAffiliate|null
      */
-    public function getBankAffiliate(): BankAffiliate
+    public function getBankAffiliate(): ?BankAffiliate
     {
         return $this->bankAffiliate;
     }
@@ -195,9 +195,9 @@ class Company{
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -214,9 +214,9 @@ class Company{
     }
 
     /**
-     * @return DateTime
+     * @return DateTime|null
      */
-    public function getCreatedAt(): DateTime
+    public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt;
     }

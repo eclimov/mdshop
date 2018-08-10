@@ -59,9 +59,9 @@ class CompanyAddress
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAddress(): string
+    public function getAddress(): ?string
     {
         return $this->address;
     }
@@ -78,9 +78,9 @@ class CompanyAddress
     }
 
     /**
-     * @return Company
+     * @return Company|null
      */
-    public function getCompany(): Company
+    public function getCompany(): ?Company
     {
         return $this->company;
     }
@@ -97,9 +97,9 @@ class CompanyAddress
     }
 
     /**
-     * @return DateTime
+     * @return DateTime|null
      */
-    public function getCreatedAt(): DateTime
+    public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt;
     }

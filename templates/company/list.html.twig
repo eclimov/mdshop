@@ -3,7 +3,7 @@
 {% block title %}Companies{% endblock %}
 
 {% block body %}
-    <a href="{{ url('company.list') }}" class="btn btn-dark ml-auto">Create New</a>
+    <a href="{{ url('company.create') }}" class="btn btn-dark ml-auto">Create New</a>
     <div class="container mt-3 mb-4">
         <table class="table table-hover table-sm">
             <tr class="thead-dark">
@@ -13,7 +13,9 @@
             </tr>
             {% for company in companies %}
                 <tr>
-                    <td>{{ company.name }}</td>
+                    <td>
+                        <a href="{{ url('company.view', {id: company.id}) }}">{{ company.name }}</a>
+                    </td>
                     <td>{{ company.createdAt|date("d/m/Y h:s") }}</td>
                     <td style="text-align: center;">
                         <div>

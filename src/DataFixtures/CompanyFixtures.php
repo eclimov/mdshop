@@ -27,6 +27,7 @@ class CompanyFixtures extends Fixture implements DependentFixtureInterface
             $company->setVat($faker->randomAscii);
 
             $manager->persist($company);
+            $this->addReference('company_' . $i, $company);
         }
 
         $manager->flush();
