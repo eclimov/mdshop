@@ -17,8 +17,8 @@ monolog:
             handler: swift
         swift:
             type: swift_mailer
-            from_email: ${SWIFTMAIL_FROM}
-            to_email: ${SWIFTMAIL_TO}
+            from_email: 'artprezentmd@gmail.com'
+            to_email: 'klimovedik88@gmail.com'
             # or list of recipients
             # to_email:   ['dev1@example.com', 'dev2@example.com', ...]
             subject: 'An Error Occurred! %%message%%'
