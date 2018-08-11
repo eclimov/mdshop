@@ -22,8 +22,3 @@ services:
     php-fpm:
         image: ksardas/mdshop:latest
         container_name: mdshop-php-fpm
-        environment:
-            - APP_ENV=prod
-            - APP_SECRET=39d9d81c43a1571fe868ad211409c78a
-            - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@mysql:3306/${MYSQL_DATABASE}
-            - MAILER_URL=qwerty
