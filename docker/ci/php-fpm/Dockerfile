@@ -13,6 +13,8 @@ RUN apt-get update \
 
 RUN APP_ENV=prod composer install --no-dev --optimize-autoloader
 
+RUN MAILER_URL=${MAILER_URL}
+
 # Waming-up cache
 RUN APP_ENV=prod bin/console cache:warmup
 
