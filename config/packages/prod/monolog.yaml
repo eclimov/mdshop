@@ -14,8 +14,14 @@ monolog:
             type: deduplication
             # the time in seconds during which duplicate entries are discarded (default: 60)
             time: 60
-            handler: nested
-        nested:
-            type: stream
-            path: "%kernel.logs_dir%/%kernel.environment%.log"
-
+            handler: swift
+        swift:
+            type: swift_mailer
+            from_email: 'artprezentmd@gmail.com'
+            to_email: 'klimovedik88@gmail.com'
+            # or list of recipients
+            # to_email:   ['dev1@example.com', 'dev2@example.com', ...]
+            subject: 'An Error Occurred! %%message%%'
+            level: debug
+            formatter: monolog.formatter.html
+            content_type: text/html
