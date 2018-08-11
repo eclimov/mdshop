@@ -14,7 +14,10 @@ monolog:
             type: deduplication
             # the time in seconds during which duplicate entries are discarded (default: 60)
             time: 60
-            handler: swift
+            handler: nested
+        nested:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
         swift:
             type: swift_mailer
             from_email: 'artprezentmd@gmail.com'
@@ -25,3 +28,4 @@ monolog:
             level: debug
             formatter: monolog.formatter.html
             content_type: text/html
+
