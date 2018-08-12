@@ -13,13 +13,13 @@ RUN apt-get update \
 
 # Using 'dummy' values to avoid errors in cases, when required env variables aren't provided
 
-RUN APP_ENV=prod MAILER_URL=dummy composer install --no-dev --optimize-autoloader
+RUN APP_ENV=prod MAILER_URL=dummy MAILER_SENDER=dummy MAILER_SENDER=dummy composer install --no-dev --optimize-autoloader
 
 # Waming-up cache
-RUN APP_ENV=prod MAILER_URL=dummy bin/console cache:warmup
+RUN APP_ENV=prod MAILER_URL=dummy MAILER_SENDER=dummy MAILER_SENDER=dummy bin/console cache:warmup
 
 # Providing write permissions
-RUN APP_ENV=prod MAILER_URL=dummy chmod -R 777 var/
+RUN APP_ENV=prod MAILER_URL=dummy MAILER_SENDER=dummy MAILER_SENDER=dummy chmod -R 777 var/
 # https://github.com/denderello/symfony-docker-example/issues/2
 
 # TODO: execute migrations(if any) automatically
