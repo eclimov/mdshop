@@ -5,6 +5,7 @@ monolog:
             type: fingers_crossed
             # 500 errors are logged at the critical level
             action_level: critical
+            excluded_http_codes: [403]  # Probably, not working
             # to also log 400 level errors (but not 404's):
             # action_level: error
             # excluded_404s:
@@ -17,8 +18,8 @@ monolog:
             handler: swift
         swift:
             type: swift_mailer
-            from_email: 'artprezentmd@gmail.com'
-            to_email: 'klimovedik88@gmail.com'
+            from_email: '%env(MAILER_SENDER)%'
+            to_email: '%env(MAILER_RECIPIENT)%'
             # or list of recipients
             # to_email:   ['dev1@example.com', 'dev2@example.com', ...]
             subject: 'An Error Occurred! %%message%%'

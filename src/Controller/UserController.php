@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -78,10 +79,14 @@ class UserController extends AbstractController {
      */
     public function delete(User $user, EntityManagerInterface $em): Response
     {
-        $em->remove($user);
-        $em->flush();
+        if ($user->getUsername() !== $this->getUser()->getUsername()) {  // Do not allow deleting user himself
+            $em->remove($user);
+            $em->flush();
 
-        $this->addFlash('notice', 'User "' . $user->getUsername() . '" has been deleted');
+            $this->addFlash('notice', 'User "' . $user->getUsername() . '" has been deleted');
+        } else {
+            $this->addFlash('error', 'You cannot delete yourself');
+        }
 
         return $this->redirectToRoute('user.list');
     }
