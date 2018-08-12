@@ -28,4 +28,4 @@ services:
             - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@mysql:3306/${MYSQL_DATABASE}
             - MAILER_URL=${MAILER_URL}
             - MAILER_SENDER=${MAILER_SENDER}
-            - MAILER_SENDER=${MAILER_RECIPIENT}
+            - MAILER_RECIPIENT=${MAILER_RECIPIENT}
