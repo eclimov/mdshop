@@ -11,29 +11,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
- * @Route(name="invoice.")
+ * @Route(name="item.")
  */
-class InvoiceController extends AbstractController {
+class ItemController extends AbstractController {
     /**
-     * @Route("/invoice", name="list")
+     * @Route("/", name="list")
      * @Method("GET")
      * @return Response
      * @throws \LogicException
      */
     public function list(): Response
     {
-        return $this->render('base.html.twig');
-    }
-
-    /**
-     * @Route("invoice/create", name="create")
-     * @Method({"GET", "POST"})
-     * @param Request $request
-     * @param EntityManagerInterface $em
-     * @return Response
-     */
-    public function  create(Request $request, EntityManagerInterface $em): Response
-    {
-        return $this->render('base.html.twig');
+        return $this->render('item/list.html.twig');
     }
 }
