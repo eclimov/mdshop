@@ -15,9 +15,6 @@ RUN apt-get update \
 
 RUN APP_ENV=prod MAILER_URL=dummy MAILER_SENDER=dummy MAILER_RECIPIENT=dummy composer install --no-dev --optimize-autoloader
 
-# Applying migrations(if any)
-RUN APP_ENV=prod MAILER_URL=dummy MAILER_SENDER=dummy MAILER_RECIPIENT=dummy bin/console doctrine:migrations:migrate
-
 # Waming-up cache
 RUN APP_ENV=prod MAILER_URL=dummy MAILER_SENDER=dummy MAILER_RECIPIENT=dummy bin/console cache:warmup
 
