@@ -28,6 +28,4 @@ jobs:
           name: Deploy applocation to Digital Ocean
           #Use 'docker-compose logs -f -t' to attach yourself to the logs of all running services
           command: |
-            ssh -o "StrictHostKeyChecking no" $DEPLOY_USER@$DEPLOY_HOST "cd /opt/mdshop && docker-compose -f docker-compose.prod.yml pull php-fpm && docker-compose -f docker-compose.prod.yml up -d --build --force-recreate php-fpm"
-            git pull
-            docker-compose exec -T php-fpm bin/console doctrine:migrations:migrate -n
+            ssh -o "StrictHostKeyChecking no" $DEPLOY_USER@$DEPLOY_HOST "cd /opt/mdshop && docker-compose -f docker-compose.prod.yml pull php-fpm && docker-compose -f docker-compose.prod.yml up -d --build --force-recreate php-fpm && git pull && docker-compose exec -T php-fpm bin/console doctrine:migrations:migrate -n"
