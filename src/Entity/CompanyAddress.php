@@ -29,7 +29,7 @@ class CompanyAddress
     /**
      * @var Company
      * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="addresses")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $company;
 
