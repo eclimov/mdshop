@@ -2,6 +2,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    xls_directory: '%kernel.project_dir%/public/uploads/xls'
 
 services:
     # default configuration for services in *this* file
@@ -28,3 +29,7 @@ services:
     # please note that last definitions always *replace* previous ones
     App\Controller\SecurityController:
         tags: ['controller.service_arguments']
+
+    App\Service\XlsProcessor:
+        arguments:
+            $targetDirectory: '%xls_directory%'
