@@ -32,6 +32,7 @@ class XlsProcessor
 
     public function getSpreadSheet(String $fileName): Spreadsheet
     {
+        // TODO: get correct path ('uploads/$fileName' is not quite correct)
         return $this->factory->createSpreadsheet($this->getTargetDirectory() . '/' . $fileName);
     }
 
@@ -42,14 +43,14 @@ class XlsProcessor
 
     /**
      * @param Spreadsheet $spreadsheet
-     * @param String $entityName
+     * @param String $typeName
      * @param String $fileName
      * @return string
      * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
      */
-    public function save(Spreadsheet $spreadsheet, String $entityName, String $fileName): string
+    public function save(Spreadsheet $spreadsheet, String $typeName, String $fileName): string
     {
-        $saveToDirectory = $this->getTargetDirectory() . '/' . strtolower($entityName);
+        $saveToDirectory = $this->getTargetDirectory() . strtolower($typeName);
         $fileSystem = new Filesystem();
         if (!$fileSystem->exists($saveToDirectory )) {
             $fileSystem->mkdir($saveToDirectory );  //  0777 permissions by default
