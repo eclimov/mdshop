@@ -26,10 +26,6 @@ class XlsProcessor
     public function __construct(string $targetDirectory)
     {
         $this->targetDirectory = $targetDirectory;
-        $fileSystem = new Filesystem();
-        if (!$fileSystem->exists($targetDirectory)) {
-            $fileSystem->mkdir($targetDirectory);  //  0777 permissions by default
-        }
 
         $this->factory = new Factory();
     }
@@ -46,14 +42,21 @@ class XlsProcessor
 
     /**
      * @param Spreadsheet $spreadsheet
+     * @param String $entityName
      * @param String $fileName
      * @return string
      * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
      */
-    public function save(Spreadsheet $spreadsheet, String $fileName): string
+    public function save(Spreadsheet $spreadsheet, String $entityName, String $fileName): string
     {
+        $saveToDirectory = $this->getTargetDirectory() . '/' . strtolower($entityName);
+        $fileSystem = new Filesystem();
+        if (!$fileSystem->exists($saveToDirectory )) {
+            $fileSystem->mkdir($saveToDirectory );  //  0777 permissions by default
+        }
+
         $writer = $this->factory->createWriter($spreadsheet, 'Xls');
-        $writer->save($this->getTargetDirectory() . '/' . $fileName);
+        $writer->save($saveToDirectory  . '/' . $fileName);
 
         return $fileName;
     }
