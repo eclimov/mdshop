@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +21,12 @@ class ItemController extends AbstractController {
      */
     public function list(): Response
     {
-        return $this->render('item/list.html.twig');
+        $users = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findAll();
+
+        return $this->render('item/list.html.twig', [
+            'users' => $users,
+        ]);
     }
 }
