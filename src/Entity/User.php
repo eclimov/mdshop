@@ -40,6 +40,13 @@ class User implements UserInterface, \Serializable
     private $email;
 
     /**
+     * @var Company
+     * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="users")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     */
+    private $company;
+
+    /**
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
@@ -53,6 +60,25 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->isActive = true;
+    }
+
+    /**
+     * @return Company|null
+     */
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    /**
+     * @param Company $company
+     * @return User
+     */
+    public function setCompany(Company $company): User
+    {
+        $this->company = $company;
+
+        return $this;
     }
 
     /**

@@ -9,6 +9,7 @@
             <tr class="thead-dark">
                 <th>Username</th>
                 <th>Email</th>
+                <th>Company</th>
                 <th>Created At</th>
                 <th style="text-align: center;">Actions</th>
             </tr>
@@ -19,6 +20,9 @@
                     </td>
                     <td>
                         {{ user.email }}
+                    </td>
+                    <td>
+                        {{ user.company ? user.company.name }}
                     </td>
                     <td>{{ user.createdAt|date("d/m/Y h:s") }}</td>
                     <td style="text-align: center;">
