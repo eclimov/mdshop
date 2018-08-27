@@ -60,8 +60,7 @@ class UserController extends AbstractController {
             $this->addFlash('notice', 'User "' . $user->getUsername() . '" has been created');
 
             return $this->redirectToRoute(
-                'user.list',
-                ['id' => $user->getId(),]
+                'user.list'
             );
         }
 

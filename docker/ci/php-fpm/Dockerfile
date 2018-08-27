@@ -23,4 +23,6 @@ RUN APP_ENV=prod MAILER_URL=dummy MAILER_SENDER=dummy MAILER_RECIPIENT=dummy bin
 RUN APP_ENV=prod MAILER_URL=dummy MAILER_SENDER=dummy MAILER_RECIPIENT=dummy chmod -R 777 var/
 # https://github.com/denderello/symfony-docker-example/issues/2
 
+RUN APP_ENV=prod MAILER_URL=dummy MAILER_SENDER=dummy MAILER_RECIPIENT=dummy chmod -R 777 public/uploads/
+
 # TODO: execute migrations(if any) automatically
