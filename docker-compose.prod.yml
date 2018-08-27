@@ -22,6 +22,7 @@ services:
     php-fpm:
         image: ksardas/mdshop:latest
         container_name: mdshop-php-fpm
+        working_dir: /application
         volumes:
             - /public/uploads:/application/public/uploads
         environment:
