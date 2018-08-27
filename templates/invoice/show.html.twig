@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Invoice #{{ invoice.id }}{% endblock %}
+
+{% block body %}
+    {% include 'toolbar.html.twig' with {
+        'deleteForm': deleteForm,
+        'urlEdit': url('invoice.edit', {id: invoice.id})
+    } %}
+
+    <h class="display-4">Invoice #{{ invoice.id }}</h>
+    <p>Seller: <a href="{{ url('company.view', {id: invoice.seller.id}) }}">{{ invoice.seller.name }}</a></p>
+    <p>Buyer: <a href="{{ url('company.view', {id: invoice.buyer.id}) }}">{{ invoice.buyer.name }}</a></p>
+
+    <a href="{{ url('invoice.download', {id: invoice.id}) }}">
+        <button type="button" class="btn btn-primary" title="Download">
+            Download
+        </button>
+    </a>
+{% endblock %}

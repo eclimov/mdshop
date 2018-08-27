@@ -10,30 +10,18 @@ use Symfony\Component\Filesystem\Filesystem;
 class XlsProcessor
 {
     /**
-     * @var string
-     */
-    private $targetDirectory;
-
-    /**
      * @var Factory
      */
     private $factory;
 
-    /**
-     * FileUploader constructor.
-     * @param string $targetDirectory
-     */
-    public function __construct(string $targetDirectory)
+    public function __construct()
     {
-        $this->targetDirectory = $targetDirectory;
-
         $this->factory = new Factory();
     }
 
-    public function getSpreadSheet(String $fileName): Spreadsheet
+    public function getSpreadSheet(String $path): Spreadsheet
     {
-        // TODO: get correct path ('uploads/$fileName' is not quite correct)
-        return $this->factory->createSpreadsheet($this->getTargetDirectory() . '/' . $fileName);
+        return $this->factory->createSpreadsheet($path);
     }
 
     public function createSpreadSheet()
@@ -43,30 +31,18 @@ class XlsProcessor
 
     /**
      * @param Spreadsheet $spreadsheet
-     * @param String $typeName
+     * @param String $path
      * @param String $fileName
-     * @return string
      * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
      */
-    public function save(Spreadsheet $spreadsheet, String $typeName, String $fileName): string
+    public function save(Spreadsheet $spreadsheet, String $path, String $fileName)
     {
-        $saveToDirectory = $this->getTargetDirectory() . strtolower($typeName);
         $fileSystem = new Filesystem();
-        if (!$fileSystem->exists($saveToDirectory )) {
-            $fileSystem->mkdir($saveToDirectory );  //  0777 permissions by default
+        if (!$fileSystem->exists($path )) {
+            $fileSystem->mkdir($path );  //  0777 permissions by default
         }
 
         $writer = $this->factory->createWriter($spreadsheet, 'Xls');
-        $writer->save($saveToDirectory  . '/' . $fileName);
-
-        return $fileName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTargetDirectory(): string
-    {
-        return $this->targetDirectory;
+        $writer->save($path  . '/' . $fileName);
     }
 }

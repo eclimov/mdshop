@@ -18,7 +18,7 @@ class BankAffiliateFixtures extends Fixture implements DependentFixtureInterface
         $faker = Faker\Factory::create('en_US');
         for ($i = 0; $i < 10; $i++) {
             $bankAffiliate = new BankAffiliate();
-            $bankAffiliate->setAffiliateNumber($faker->randomAscii);
+            $bankAffiliate->setAffiliateNumber($faker->randomAscii . $faker->numberBetween(1111, 9999));
             $bankAffiliate->setBank($this->getReference('bank_' . $faker->numberBetween(0,2)));
 
             $manager->persist($bankAffiliate);

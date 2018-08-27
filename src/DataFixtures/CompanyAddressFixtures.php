@@ -16,10 +16,10 @@ class CompanyAddressFixtures extends Fixture implements DependentFixtureInterfac
     public function load(ObjectManager $manager): void
     {
         $faker = Faker\Factory::create('en_US');
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $companyAddress = new CompanyAddress();
             $companyAddress->setAddress($faker->address);
-            $companyAddress->setCompany($this->getReference('company_' . $faker->numberBetween(0,19)));
+            $companyAddress->setCompany($this->getReference('company_' . $i));
 
             $manager->persist($companyAddress);
             $this->addReference('companyAddress_' . $i, $companyAddress);

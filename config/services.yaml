@@ -31,5 +31,8 @@ services:
         tags: ['controller.service_arguments']
 
     App\Service\XlsProcessor:
+
+    App\Service\InvoiceGenerator:
         arguments:
-            $targetDirectory: '%uploads_directory%'
+            $targetDirectory: '%uploads_directory%/invoice/'
+            $xlsProcessor: '@App\Service\XlsProcessor'

@@ -9,7 +9,6 @@
     } %}
     <h class="display-4">{{ bank.name }}</h>
     <p>Created at: {{ bank.createdAt|date("d/m/Y") }}</p>
-    <p>additional info1</p>
     {% include 'bankAffiliate/list.html.twig' with {
         'bank': bank,
     } %}

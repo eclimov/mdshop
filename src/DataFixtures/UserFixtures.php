@@ -4,10 +4,11 @@ namespace App\DataFixtures;
 
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker;
 
-class UserFixtures extends Fixture
+class UserFixtures extends Fixture implements DependentFixtureInterface
 {
     /**
      * @param ObjectManager $manager
@@ -21,9 +22,20 @@ class UserFixtures extends Fixture
             $user->setPassword('$2y$13$TVYGaBVdCJcEfRKhncRGre9TvZobwmmOE88QHaRiqXK3CCeaWcOLq');  // 12
             $user->setEmail($faker->email);
             $user->setUsername('t' . $i);
+            $user->setCompany($this->getReference('company_' . $i));
             $manager->persist($user);
         }
 
         $manager->flush();
+    }
+
+    /**
+     * @return array
+     */
+    public function getDependencies(): array
+    {
+        return [
+            CompanyFixtures::class,
+        ];
     }
 }

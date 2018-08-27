@@ -13,6 +13,7 @@
     <p>IBAN: {{ company.iban }}</p>
     <p>VAT: {{ company.vat }}</p>
     <p>Created at: {{ company.createdAt|date("d/m/Y") }}</p>
+    <a href="{{ url('invoice.create', {id: company.id}) }}" class="btn btn-dark ml-auto">Generate Invoice</a>
     {% include 'companyAddress/list.html.twig' with {
         'company': company,
     } %}
