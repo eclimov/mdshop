@@ -25,4 +25,4 @@ RUN APP_ENV=prod MAILER_URL=dummy MAILER_SENDER=dummy MAILER_RECIPIENT=dummy chm
 
 RUN APP_ENV=prod MAILER_URL=dummy MAILER_SENDER=dummy MAILER_RECIPIENT=dummy chmod -R 777 public/uploads/
 
-# TODO: execute migrations(if any) automatically
+RUN -v /public/uploads:/application/public/uploads
