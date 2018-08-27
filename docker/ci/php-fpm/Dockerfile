@@ -24,3 +24,5 @@ RUN APP_ENV=prod MAILER_URL=dummy MAILER_SENDER=dummy MAILER_RECIPIENT=dummy chm
 # https://github.com/denderello/symfony-docker-example/issues/2
 
 RUN APP_ENV=prod MAILER_URL=dummy MAILER_SENDER=dummy MAILER_RECIPIENT=dummy chmod -R 777 public/uploads/
+
+RUN -it -v $(pwd)/public/uploads:/application/public/uploads php-fpm
