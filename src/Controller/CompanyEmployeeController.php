@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Company;
-use App\Entity\CompanyAddress;
-use App\Form\CompanyAddressType;
+use App\Entity\CompanyEmployee;
+use App\Form\CompanyEmployeeType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -14,28 +14,28 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Route(name="companyAddress.")
+ * @Route(name="companyEmployee.")
  */
-class CompanyAddressController extends AbstractController {
+class CompanyEmployeeController extends AbstractController {
     /**
-     * @Route("/companyAddress", name="list")
+     * @Route("/companyEmployee", name="list")
      * @Method("GET")
      * @return Response
      * @throws \LogicException
      */
     public function list(): Response
     {
-        $companyAddresses = $this->getDoctrine()
-            ->getRepository(CompanyAddress::class)
+        $companyEmployees = $this->getDoctrine()
+            ->getRepository(CompanyEmployee::class)
             ->findAll();
 
         return $this->render('companyAddress/list.html.twig', [
-            'companyAddresses' => $companyAddresses,
+            'companyEmployees' => $companyEmployees,
         ]);
     }
 
     /**
-     * @Route("company/{id}/createCompanyAddress", name="create", requirements={"id" = "\d+"})
+     * @Route("company/{id}/createCompanyEmployee", name="create", requirements={"id" = "\d+"})
      * @Method({"GET", "POST"})
      * @param Request $request
      * @param EntityManagerInterface $em
@@ -44,16 +44,16 @@ class CompanyAddressController extends AbstractController {
      */
     public function create(Request $request, EntityManagerInterface $em, Company $company): Response
     {
-        $companyAddress = new CompanyAddress();
-        $form = $this->createForm(CompanyAddressType::class, $companyAddress);
+        $companyEmployee = new CompanyEmployee();
+        $form = $this->createForm(CompanyEmployeeType::class, $companyEmployee);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $companyAddress->setCompany($company);
-            $em->persist($companyAddress);
+            $companyEmployee->setCompany($company);
+            $em->persist($companyEmployee);
             $em->flush();
 
-            $this->addFlash('notice', 'Company Address "' . $companyAddress->getAddress() . '" has been created');
+            $this->addFlash('notice', 'Company Employee "' . $companyEmployee->getName() . '" has been created');
 
             return $this->redirectToRoute(
                 'company.view',
@@ -61,68 +61,68 @@ class CompanyAddressController extends AbstractController {
             );
         }
 
-        return $this->render('companyAddress/create.html.twig', [
+        return $this->render('companyEmployee/create.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/companyAddress/{id}/delete", name="delete", requirements={"id" = "\d+"})
+     * @Route("/companyEmployee/{id}/delete", name="delete", requirements={"id" = "\d+"})
      * @Method({"DELETE", "POST"})
-     * @param CompanyAddress $companyAddress
+     * @param CompanyEmployee $companyEmployee
      * @param EntityManagerInterface $em
      * @return Response
      */
-    public function delete(CompanyAddress $companyAddress, EntityManagerInterface $em): Response
+    public function delete(CompanyEmployee $companyEmployee, EntityManagerInterface $em): Response
     {
-        $em->remove($companyAddress);
+        $em->remove($companyEmployee);
         $em->flush();
 
-        $this->addFlash('notice', 'Company Address "' . $companyAddress->getAddress() . '" has been deleted');
+        $this->addFlash('notice', 'Company Employee "' . $companyEmployee->getName() . '" has been deleted');
 
         return $this->redirectToRoute(
             'company.view',
-            ['id' => $companyAddress->getCompany()->getId(),]
+            ['id' => $companyEmployee->getCompany()->getId(),]
         );
     }
 
     /**
-     * @Route("/companyAddress/{id}/edit", name="edit", requirements={"id" = "\d+"})
+     * @Route("/companyEmployee/{id}/edit", name="edit", requirements={"id" = "\d+"})
      * @Method({"GET", "POST"})
      * @param Request $request
-     * @param CompanyAddress $companyAddress
+     * @param CompanyEmployee $companyEmployee
      * @param EntityManagerInterface $em
      * @return Response
      */
-    public function edit(Request $request, CompanyAddress $companyAddress, EntityManagerInterface $em): Response
+    public function edit(Request $request, CompanyEmployee $companyEmployee, EntityManagerInterface $em): Response
     {
-        $form = $this->createForm(CompanyAddressType::class, $companyAddress);
+        $form = $this->createForm(CompanyEmployeeType::class, $companyEmployee);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
 
-            $this->addFlash('notice', 'Company address info has been updated');
+            $this->addFlash('notice', 'Company employee info has been updated');
 
             return $this->redirectToRoute(
                 'company.view',
-                ['id' => $companyAddress->getCompany()->getId(),]
+                ['id' => $companyEmployee->getCompany()->getId(),]
             );
         }
 
-        return $this->render('companyAddress/edit.html.twig', [
+        return $this->render('companyEmployee/edit.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @param CompanyAddress $companyAddress
+     * @param CompanyEmployee $companyEmployee
      * @return FormInterface
      */
-    public function createDeleteForm(CompanyAddress $companyAddress): FormInterface
+    public function createDeleteForm(CompanyEmployee $companyEmployee): FormInterface
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('companyAddress.delete', ['id' => $companyAddress->getId()]))
+            ->setAction($this->generateUrl('companyEmployee.delete', ['id' => $companyEmployee->getId()]))
             ->setMethod('DELETE')
             ->getForm();
     }

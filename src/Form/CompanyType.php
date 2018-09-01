@@ -34,6 +34,9 @@ class CompanyType extends AbstractType
                     new NotBlank(),
                     new Length(['max' => 255,]),
                 ],
+                'attr' => [
+                    'autofocus' => true,
+                ],
             ])
             ->add('bankAffiliate', EntityType::class, [
                 'class' => BankAffiliate::class,

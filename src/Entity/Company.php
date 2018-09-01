@@ -52,6 +52,12 @@ class Company{
 
     /**
      * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="App\Entity\CompanyEmployee", mappedBy="company")
+     */
+    private $employees;
+
+    /**
+     * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="company")
      */
     private $users;
@@ -66,6 +72,7 @@ class Company{
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
+        $this->employees = new ArrayCollection();
     }
 
     /**
@@ -76,6 +83,19 @@ class Company{
     {
         if(!$this->addresses->contains($address)) {
             $this->addresses->add($address);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param CompanyEmployee $employee
+     * @return Company
+     */
+    public function addEmployee(CompanyEmployee $employee): Company
+    {
+        if(!$this->employees->contains($this->employees)) {
+            $this->employees->add($employee);
         }
 
         return $this;
@@ -103,6 +123,17 @@ class Company{
         $this->addresses->removeElement($address);
         return $this;
     }
+
+    /**
+     * @param CompanyEmployee $employee
+     * @return Company
+     */
+    public function removeEmployee(CompanyEmployee $employee): Company
+    {
+        $this->employees->removeElement($employee);
+        return $this;
+    }
+
 
     /**
      * @return string|null
@@ -167,6 +198,14 @@ class Company{
     public function getAddresses(): Collection
     {
         return $this->addresses;
+    }
+
+    /**
+     * @return Collection|CompanyEmployee[]
+     */
+    public function getEmployees(): Collection
+    {
+        return $this->employees;
     }
 
     /**
