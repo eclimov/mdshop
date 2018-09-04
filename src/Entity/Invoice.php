@@ -83,6 +83,58 @@ class Invoice
     private $unloadingPoint;
 
     /**
+     * @var CompanyEmployee
+     * @ORM\ManyToOne(targetEntity="App\Entity\CompanyEmployee")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     */
+    private $approvedBy;
+
+    /**
+     * @var CompanyEmployee
+     * @ORM\ManyToOne(targetEntity="App\Entity\CompanyEmployee")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     */
+    private $processedBy;
+
+    /**
+     * @return CompanyEmployee|null
+     */
+    public function getApprovedBy(): ?CompanyEmployee
+    {
+        return $this->approvedBy;
+    }
+
+    /**
+     * @param CompanyEmployee $approvedBy
+     * @return Invoice
+     */
+    public function setApprovedBy(CompanyEmployee $approvedBy): Invoice
+    {
+        $this->approvedBy = $approvedBy;
+
+        return $this;
+    }
+
+    /**
+     * @return CompanyEmployee|null
+     */
+    public function getProcessedBy(): ?CompanyEmployee
+    {
+        return $this->processedBy;
+    }
+
+    /**
+     * @param CompanyEmployee $processedBy
+     * @return Invoice
+     */
+    public function setProcessedBy(CompanyEmployee $processedBy): Invoice
+    {
+        $this->processedBy = $processedBy;
+
+        return $this;
+    }
+
+    /**
      * @return DateTime|null
      */
     public function getOrderDate(): ?DateTime

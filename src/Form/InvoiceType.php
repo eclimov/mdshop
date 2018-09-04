@@ -4,7 +4,9 @@ namespace App\Form;
 
 use App\Entity\Company;
 use App\Entity\CompanyAddress;
+use App\Entity\CompanyEmployee;
 use App\Entity\Invoice;
+use App\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -74,6 +76,28 @@ class InvoiceType extends AbstractType
                         ->where('a.company = :company')
                         ->setParameters([
                             'company' => $company,
+                        ]);
+                },
+            ])
+            ->add('approvedBy', EntityType::class, [
+                'class' => CompanyEmployee::class,
+                'choice_label' => 'name',
+                'query_builder' => function (EntityRepository $er) use ($companyInitiator) {
+                    return $er->createQueryBuilder('a')
+                        ->where('a.company = :company')
+                        ->setParameters([
+                            'company' => $companyInitiator,
+                        ]);
+                },
+            ])
+            ->add('processedBy', EntityType::class, [
+                'class' => CompanyEmployee::class,
+                'choice_label' => 'name',
+                'query_builder' => function (EntityRepository $er) use ($companyInitiator) {
+                    return $er->createQueryBuilder('a')
+                        ->where('a.company = :company')
+                        ->setParameters([
+                            'company' => $companyInitiator,
                         ]);
                 },
             ]);
