@@ -25,6 +25,11 @@ class CompanyFixtures extends Fixture implements DependentFixtureInterface
             $company->setFiscalCode($faker->randomAscii);
             $company->setIban($faker->iban(373));
             $company->setVat($faker->randomAscii);
+            $company->setCompanyKind(
+                $this->getReference(
+                    'companyKind' . $faker->randomElement(['Srl', 'Sa',])
+                )
+            );
 
             $manager->persist($company);
             $this->addReference('company_' . $i, $company);
@@ -40,6 +45,7 @@ class CompanyFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             BankAffiliateFixtures::class,
+            CompanyKindFixtures::class,
         ];
     }
 }

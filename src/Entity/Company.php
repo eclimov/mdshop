@@ -69,6 +69,13 @@ class Company{
      */
     private $bankAffiliate;
 
+    /**
+     * @var CompanyKind
+     * @ORM\ManyToOne(targetEntity="App\Entity\CompanyKind")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     */
+    private $companyKind;
+
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
@@ -214,6 +221,25 @@ class Company{
     public function getUsers(): Collection
     {
         return $this->users;
+    }
+
+    /**
+     * @return CompanyKind|null
+     */
+    public function getCompanyKind(): ?CompanyKind
+    {
+        return $this->companyKind;
+    }
+
+    /**
+     * @param CompanyKind $companyKind
+     * @return Company
+     */
+    public function setCompanyKind(CompanyKind $companyKind): Company
+    {
+        $this->companyKind = $companyKind;
+
+        return $this;
     }
 
     /**
