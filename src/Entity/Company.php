@@ -295,6 +295,14 @@ class Company{
     }
 
     /**
+     * @return string
+     */
+    public function getFullName(): string
+    {
+        return '"' . $this->name . '" ' . $this->getCompanyKind()->getName();
+    }
+
+    /**
      * @param string $name
      * @return Company
      */

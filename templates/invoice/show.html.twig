@@ -9,8 +9,8 @@
     } %}
 
     <h class="display-4">Invoice #{{ invoice.id }}</h>
-    <p>Seller: <a href="{{ url('company.view', {id: invoice.seller.id}) }}">{{ invoice.seller.name }}</a></p>
-    <p>Buyer: <a href="{{ url('company.view', {id: invoice.buyer.id}) }}">{{ invoice.buyer.name }}</a></p>
+    <p>Seller: <a href="{{ url('company.view', {id: invoice.seller.id}) }}">{{ invoice.seller.fullName }}</a></p>
+    <p>Buyer: <a href="{{ url('company.view', {id: invoice.buyer.id}) }}">{{ invoice.buyer.fullName }}</a></p>
 
     <a href="{{ url('invoice.download', {id: invoice.id}) }}">
         <button type="button" class="btn btn-primary" title="Download">

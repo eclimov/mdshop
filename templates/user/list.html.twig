@@ -22,7 +22,7 @@
                         {{ user.email }}
                     </td>
                     <td>
-                        {{ user.company ? user.company.name }}
+                        {{ user.company ? user.company.fullName }}
                     </td>
                     <td>{{ user.createdAt|date("d/m/Y h:s") }}</td>
                     <td style="text-align: center;">

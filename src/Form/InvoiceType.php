@@ -44,8 +44,10 @@ class InvoiceType extends AbstractType
             ])
             ->add('carrier', EntityType::class, [
                 'class' => Company::class,
-                'choice_label' => 'name',
-                'preferred_choices' => [$company],
+                'choice_label' => function(Company $company) {
+                    return $company->getFullName();
+                },
+                'preferred_choices' => [$company,],
             ])
             ->add('attachedDocument', TextType::class, [
                 'constraints' => [

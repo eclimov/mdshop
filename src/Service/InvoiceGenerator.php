@@ -41,15 +41,14 @@ class InvoiceGenerator
             'D2',
             $invoice->getDeliveryDate()->format('d.m.Y')
         );
-        $carrier = $invoice->getCarrier();
         $sheet->setCellValue(
             'I4',
-            '"' . $carrier->getName() . '" ' . $carrier->getCompanyKind()->getName()
+            $invoice->getCarrier()->getFullName()
         );
         $seller = $invoice->getSeller();
         $sheet->setCellValue(
             'C5',
-            '"' . $seller->getName() . '" ' . $seller->getCompanyKind()->getName()
+            '"' . $seller->getFullName()
             . ' IBAN ' . $seller->getIban()
             . ' ' . $seller->getBankAffiliate()->getAffiliateNumber()
             . ' ' . $seller->getAddresses()[0]->getAddress()
@@ -57,7 +56,7 @@ class InvoiceGenerator
         $buyer = $invoice->getBuyer();
         $sheet->setCellValue(
             'C6',
-            '"' . $buyer->getName() . '" ' . $buyer->getCompanyKind()->getName()
+            '"' . $buyer->getFullName()
             . ' IBAN ' . $buyer->getIban()
             . ' ' . $buyer->getBankAffiliate()->getAffiliateNumber()
             . ' ' . $buyer->getAddresses()[0]->getAddress()

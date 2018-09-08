@@ -14,7 +14,7 @@
             {% for company in companies %}
                 <tr>
                     <td>
-                        <a href="{{ url('company.view', {id: company.id}) }}">{{ company.name }} {{ company.companyKind ? company.companyKind.name : '' }}</a>
+                        <a href="{{ url('company.view', {id: company.id}) }}">{{ company.fullName }}</a>
                     </td>
                     <td>{{ company.createdAt|date("d/m/Y h:s") }}</td>
                     <td style="text-align: center;">
