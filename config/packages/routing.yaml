@@ -1,3 +1,11 @@
 framework:
     router:
         strict_requirements: ~
+
+# Brute-force protection
+login_gate:
+    storages: ['orm'] # Attempts storages. Available storages: ['orm', 'session', 'mongodb']
+    options:
+        max_count_attempts: 3
+        timeout: 5 #Ban period
+        # watch_period: 3600 #Only for databases storage. Period of actuality attempts

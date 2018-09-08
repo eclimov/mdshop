@@ -1,4 +1,7 @@
 {
+    "anyx/login-gate-bundle": {
+        "version": "0.7"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {

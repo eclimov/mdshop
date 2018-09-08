@@ -36,3 +36,12 @@ services:
         arguments:
             $targetDirectory: '%uploads_directory%/invoice'
             $xlsProcessor: '@App\Service\XlsProcessor'
+
+    App\EventListener\BruteForceAttemptListener:
+        arguments:
+            $mailer: '@mailer'
+            $mailfrom: '%env(MAILER_SENDER)%'
+            $mailto: '%env(MAILER_RECIPIENT)%'
+            $twig: '@twig'
+        tags:
+            - { name: kernel.event_listener, event: security.brute_force_attempt, method: onBruteForceAttempt }

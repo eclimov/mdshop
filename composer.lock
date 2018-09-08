@@ -4,8 +4,63 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6ee66162dfebd6ac5946a8250f43b3dc",
+    "content-hash": "1f5b7a42786c2165122ad106a101bb1d",
     "packages": [
+        {
+            "name": "anyx/login-gate-bundle",
+            "version": "0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/anyx/LoginGateBundle.git",
+                "reference": "69991c1743dedfe4d9af6adac1a4a062e97d175c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/anyx/LoginGateBundle/zipball/69991c1743dedfe4d9af6adac1a4a062e97d175c",
+                "reference": "69991c1743dedfe4d9af6adac1a4a062e97d175c",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/config": "^3.3|^4.0",
+                "symfony/dependency-injection": "^3.3|^4.0",
+                "symfony/security-bundle": "^3.3|^4.0"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "^1.6.3",
+                "doctrine/doctrine-fixtures-bundle": "^2.3",
+                "doctrine/mongodb-odm": "~1.0",
+                "doctrine/mongodb-odm-bundle": "~3.0",
+                "doctrine/orm": "^2.5.4",
+                "phpunit/phpunit": "^5.4",
+                "symfony/browser-kit": "^3.3|^4.0",
+                "symfony/css-selector": "^3.4",
+                "symfony/form": "^3.3|^4.0",
+                "symfony/templating": "^3.3|^4.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Anyx\\LoginGateBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aleksandr Klimenkov",
+                    "email": "alx.devel@gmail.com"
+                }
+            ],
+            "description": "Checking brute force attacks on site",
+            "homepage": "https://github.com/anyx/LoginGateBundle",
+            "keywords": [
+                "brute-force",
+                "security"
+            ],
+            "time": "2018-07-02T16:12:01+00:00"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.6.0",

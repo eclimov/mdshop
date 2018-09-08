@@ -1,0 +1,6 @@
+<b>Attempted to log in via brute-force attack</b>
+<hr>
+{% for ip in request.clientIps %}
+    {{ ip }}
+    <br />
+{% endfor %}
