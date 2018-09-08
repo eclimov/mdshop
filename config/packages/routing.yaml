@@ -7,5 +7,5 @@ login_gate:
     storages: ['orm'] # Attempts storages. Available storages: ['orm', 'session', 'mongodb']
     options:
         max_count_attempts: 3
-        timeout: 5 #Ban period
+        timeout: 600 #Ban period (sec)
         # watch_period: 3600 #Only for databases storage. Period of actuality attempts
