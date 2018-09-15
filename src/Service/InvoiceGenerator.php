@@ -85,15 +85,15 @@ class InvoiceGenerator
             'G9',
             $invoice->getUnloadingPoint()->getAddress()
         );
-        $approvedBy = $invoice->getApprovedBy();
+        $approvedByEmployee = $invoice->getApprovedByEmployee();
         $sheet->setCellValue(
             'C25',
-            trim($approvedBy->getPosition() . ' ' . $approvedBy->getName())
+            trim($approvedByEmployee->getPosition() . ' ' . $approvedByEmployee->getName())
         );
-        $processedBy = $invoice->getProcessedBy();
+        $processedByEmployee = $invoice->getProcessedByEmployee();
         $sheet->setCellValue(
             'C27',
-            trim($processedBy->getPosition() . ' ' . $processedBy->getName())
+            trim($processedByEmployee->getPosition() . ' ' . $processedByEmployee->getName())
         );
         $fileName = $invoice->getId() . '.xlsx';
         $this->getXlsProcessor()->save(

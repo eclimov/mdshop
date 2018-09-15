@@ -81,7 +81,7 @@ class InvoiceType extends AbstractType
                         ]);
                 },
             ])
-            ->add('approvedBy', EntityType::class, [
+            ->add('approvedByEmployee', EntityType::class, [
                 'class' => CompanyEmployee::class,
                 'choice_label' => 'name',
                 'query_builder' => function (EntityRepository $er) use ($companyInitiator) {
@@ -92,7 +92,7 @@ class InvoiceType extends AbstractType
                         ]);
                 },
             ])
-            ->add('processedBy', EntityType::class, [
+            ->add('processedByEmployee', EntityType::class, [
                 'class' => CompanyEmployee::class,
                 'choice_label' => 'name',
                 'query_builder' => function (EntityRepository $er) use ($companyInitiator) {

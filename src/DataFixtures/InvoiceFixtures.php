@@ -29,8 +29,8 @@ class InvoiceFixtures extends Fixture implements DependentFixtureInterface
             $invoice->setOrderDate($faker->dateTimeBetween('-30 days', 'now'));
             $invoice->setLoadingPoint($faker->randomElement($invoice->getSeller()->getAddresses()->toArray()));
             $invoice->setUnloadingPoint($faker->randomElement($invoice->getBuyer()->getAddresses()->toArray()));
-            $invoice->setApprovedBy($faker->randomElement($invoice->getSeller()->getEmployees()->toArray()));
-            $invoice->setProcessedBy($faker->randomElement($invoice->getSeller()->getEmployees()->toArray()));
+            $invoice->setApprovedByEmployee($faker->randomElement($invoice->getSeller()->getEmployees()->toArray()));
+            $invoice->setProcessedByEmployee($faker->randomElement($invoice->getSeller()->getEmployees()->toArray()));
 
             $manager->persist($invoice);
             $this->addReference('invoice_' . $i, $invoice);

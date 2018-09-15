@@ -87,30 +87,30 @@ class Invoice
      * @ORM\ManyToOne(targetEntity="App\Entity\CompanyEmployee")
      * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
-    private $approvedBy;
+    private $approvedByEmployee;
 
     /**
      * @var CompanyEmployee
      * @ORM\ManyToOne(targetEntity="App\Entity\CompanyEmployee")
      * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
-    private $processedBy;
+    private $processedByEmployee;
 
     /**
      * @return CompanyEmployee|null
      */
-    public function getApprovedBy(): ?CompanyEmployee
+    public function getApprovedByEmployee(): ?CompanyEmployee
     {
-        return $this->approvedBy;
+        return $this->approvedByEmployee;
     }
 
     /**
-     * @param CompanyEmployee $approvedBy
+     * @param CompanyEmployee $approvedByEmployee
      * @return Invoice
      */
-    public function setApprovedBy(CompanyEmployee $approvedBy): Invoice
+    public function setApprovedByEmployee(CompanyEmployee $approvedByEmployee): Invoice
     {
-        $this->approvedBy = $approvedBy;
+        $this->approvedByEmployee = $approvedByEmployee;
 
         return $this;
     }
@@ -118,18 +118,18 @@ class Invoice
     /**
      * @return CompanyEmployee|null
      */
-    public function getProcessedBy(): ?CompanyEmployee
+    public function getProcessedByEmployee(): ?CompanyEmployee
     {
-        return $this->processedBy;
+        return $this->processedByEmployee;
     }
 
     /**
-     * @param CompanyEmployee $processedBy
+     * @param CompanyEmployee $processedByEmployee
      * @return Invoice
      */
-    public function setProcessedBy(CompanyEmployee $processedBy): Invoice
+    public function setProcessedByEmployee(CompanyEmployee $processedByEmployee): Invoice
     {
-        $this->processedBy = $processedBy;
+        $this->processedByEmployee = $processedByEmployee;
 
         return $this;
     }
