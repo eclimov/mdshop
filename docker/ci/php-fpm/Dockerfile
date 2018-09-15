@@ -3,7 +3,7 @@ FROM phpdockerio/php72-fpm:latest
 WORKDIR "/application"
 
 RUN addgroup --gid 1024 mygroup
-RUN adduser --disabled-password --gecos "" --force-badname --ingroup 1042 myuser
+RUN adduser --disabled-password --gecos "" --force-badname --ingroup mygroup myuser
 USER myuser
 
 COPY . /application
