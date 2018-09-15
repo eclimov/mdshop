@@ -33,6 +33,8 @@ within project's directory: `composer install`
 `https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-16-04`  
 12 Create 'uploads' directory and set the permissions from within container:  
 `chmod -R 777 public/uploads/`
+13 Grant all permissions to 'uploads' directory on host:  
+`sudo chmod -R 777 uploads`
 
 2. On LM:  
 1 Install pbcopy  
