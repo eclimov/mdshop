@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1f5b7a42786c2165122ad106a101bb1d",
+    "content-hash": "515150b276567f27575495b8b082d000",
     "packages": [
         {
             "name": "anyx/login-gate-bundle",
@@ -3609,6 +3609,7 @@
             ],
             "description": "Enforces Long Term Supported versions of Symfony components",
             "homepage": "https://symfony.com",
+            "abandoned": "symfony/flex",
             "time": "2018-04-03T05:04:16+00:00"
         },
         {

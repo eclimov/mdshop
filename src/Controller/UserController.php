@@ -124,6 +124,34 @@ class UserController extends AbstractController {
     }
 
     /**
+     * @Route("/user/locale/en", name="set_locale_en")
+     * @Method({"GET", "POST"})
+     * @param Request $request
+     * @return Response
+     */
+    public function setLocaleEn(Request $request) {
+        $request->getSession()->set('_locale', 'en');
+
+        return $this->redirect(
+            $request->headers->get('referer')
+        );
+    }
+
+    /**
+     * @Route("/user/locale/ru", name="set_locale_ru")
+     * @Method({"GET", "POST"})
+     * @param Request $request
+     * @return Response
+     */
+    public function setLocaleRu(Request $request) {
+        $request->getSession()->set('_locale', 'ru');
+
+        return $this->redirect(
+            $request->headers->get('referer')
+        );
+    }
+
+    /**
      * @param User $user
      * @return FormInterface
      */

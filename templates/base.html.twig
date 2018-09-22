@@ -15,13 +15,19 @@
         <a class="navbar-brand" href="/">Logo</a>
         {% if app.user %}
             <a href="{{ url('invoice.list') }}" class="btn btn-link">Invoices</a>
-            <a href="{{ url('company.list') }}" class="btn btn-link">Companies</a>
+            <a href="{{ url('company.list') }}" class="btn btn-link">{% trans %}Companies{% endtrans %}</a>
             <a href="{{ url('companyKind.list') }}" class="btn btn-link">Company kinds</a>
             <a href="{{ url('bank.list') }}" class="btn btn-link">Banks</a>
             <a href="{{ url('user.list') }}" class="btn btn-link">Users</a>
 
             <div class="ml-auto">
+                {% if app.request.getLocale() == 'en' %}
+                    <a href="{{ path('user.set_locale_ru') }}">RU</a>
+                {% else %}
+                    <a href="{{ path('user.set_locale_en') }}">EN</a>
+                {% endif %}
                 <span class="text-white">{{ app.user.username }}</span>
+
                 <a href="{{ path('logout') }}" class="btn btn-light">Logout</a>
             </div>
         {% else %}
@@ -55,7 +61,7 @@
 
 <!-- Footer -->
 <footer class="page-footer font-small blue">
-    <div class="footer-copyright text-center py-3">© {{ "now"|date("Y") }}
+    <div class="footer-copyright text-center py-1">© {{ "now"|date("Y") }}
         <a href="mailto:klimovedik88@gmail.com"> Eduard Climov</a>
     </div>
 </footer>

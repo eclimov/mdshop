@@ -3,7 +3,8 @@
 {% block title %}Items{% endblock %}
 
 {% block body %}
-    Hello! <br>
+    {% trans %}Welcome{% endtrans %}, {% trans %}user{% endtrans %}<br />
+
     This is a work-in-progress project, and you are welcome to do whatever you want for now. <br><br>
     Available users: <br>
     {% for user in users %}

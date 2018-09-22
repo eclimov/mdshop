@@ -45,3 +45,7 @@ services:
             $twig: '@twig'
         tags:
             - { name: kernel.event_listener, event: security.brute_force_attempt, method: onBruteForceAttempt }
+
+    App\EventSubscriber\LocaleSubscriber:
+        arguments: ['%kernel.default_locale%']
+        # advanced settings at https://symfony.com/doc/current/routing/service_container_parameters.html
