@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Create User{% endblock %}
+{% block title %}{% trans %}Create{% endtrans %}{% endblock %}
 
 {% block body %}
     <div class="container">
-        <h1>New User</h1>
+        <h1>{% trans %}User{% endtrans %}</h1>
 
         {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
             {{ form_widget(form) }}

@@ -9,11 +9,11 @@
 
     <form action="{{ path('security.login') }}" method="post">
         <div class="form-group">
-            <label for="username">Username:</label>
+            <label for="username">{% trans %}Username{% endtrans %}:</label>
             <input type="text" id="username" name="_username" value="{{ last_username }}" autofocus />
         </div>
         <div class="form-group">
-            <label for="password">Password:</label>
+            <label for="password">{% trans %}Password{% endtrans %}:</label>
             <input type="password" id="password" name="_password" />
         </div>
         {#
@@ -21,6 +21,6 @@
             is redirected to on success (more details below)
             <input type="hidden" name="_target_path" value="/account" />
         #}
-        <button type="submit" class="btn btn-outline-dark">login</button>
+        <button type="submit" class="btn btn-outline-dark">{% trans %}Login{% endtrans %}</button>
     </form>
 {% endblock %}

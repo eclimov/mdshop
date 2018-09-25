@@ -8,7 +8,7 @@
         'urlEdit': url('bank.edit', {id: bank.id})
     } %}
     <h class="display-4">{{ bank.name }}</h>
-    <p>Created at: {{ bank.createdAt|date("d/m/Y") }}</p>
+    <p>{% trans %}Created At{% endtrans %}: {{ bank.createdAt|date("d/m/Y") }}</p>
     {% include 'bankAffiliate/list.html.twig' with {
         'bank': bank,
     } %}

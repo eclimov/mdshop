@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Create Invoice{% endblock %}
+{% block title %}{% trans %}Create{% endtrans %}{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.min.css') }}">
@@ -8,14 +8,14 @@
 
 {% block body %}
     <div class="container">
-        <h1>New Invoice</h1>
+        <h1>{% trans %}Invoice{% endtrans %}</h1>
 
         {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
             {{ form_widget(form) }}
 
             <div class="form-group">
                 <div class="col-sm-10">
-                    <button type="submit" class="btn btn-dark">Create</button>
+                    <button type="submit" class="btn btn-dark">{% trans %}Create{% endtrans %}</button>
                 </div>
             </div>
         {{ form_end(form) }}

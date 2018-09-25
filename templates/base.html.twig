@@ -12,13 +12,13 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">Logo</a>
+        <a class="navbar-brand" href="/">Artprezent</a>
         {% if app.user %}
-            <a href="{{ url('invoice.list') }}" class="btn btn-link">Invoices</a>
+            <a href="{{ url('invoice.list') }}" class="btn btn-link">{% trans %}Invoices{% endtrans %}</a>
             <a href="{{ url('company.list') }}" class="btn btn-link">{% trans %}Companies{% endtrans %}</a>
-            <a href="{{ url('companyKind.list') }}" class="btn btn-link">Company kinds</a>
-            <a href="{{ url('bank.list') }}" class="btn btn-link">Banks</a>
-            <a href="{{ url('user.list') }}" class="btn btn-link">Users</a>
+            <a href="{{ url('companyKind.list') }}" class="btn btn-link">{% trans %}Company kinds{% endtrans %}</a>
+            <a href="{{ url('bank.list') }}" class="btn btn-link">{% trans %}Banks{% endtrans %}</a>
+            <a href="{{ url('user.list') }}" class="btn btn-link">{% trans %}Users{% endtrans %}</a>
 
             <div class="ml-auto">
                 {% if app.request.getLocale() == 'en' %}
@@ -28,11 +28,11 @@
                 {% endif %}
                 <span class="text-white">{{ app.user.username }}</span>
 
-                <a href="{{ path('logout') }}" class="btn btn-light">Logout</a>
+                <a href="{{ path('logout') }}" class="btn btn-light">{% trans %}Logout{% endtrans %}</a>
             </div>
         {% else %}
             {# not logged #}
-            <a href="{{ path('login') }}" class="btn btn-light ml-auto">Login</a>
+            <a href="{{ path('login') }}" class="btn btn-light ml-auto">{% trans %}Login{% endtrans %}</a>
         {% endif %}
     </nav>
 

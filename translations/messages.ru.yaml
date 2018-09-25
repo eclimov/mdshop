@@ -1,4 +1,72 @@
-Welcome: Добро пожаловать
-user: пользователь
+# Navbar
+Invoices: Накладные
 Companies: Компании
-Company kinds: Типы
+Company kinds: Типы компаний
+Banks: Банки
+Users: Пользователи
+Login: Войти
+Logout: Выйти
+
+# Page common
+Created At: Дата Создания
+Actions: Действия
+Create: Создать
+Edit: Редактировать
+Delete: Удалить
+Save: Сохранить
+Update: Сохранить
+
+Are you sure you want to delete this object?: Вы уверены, что хотите удалить этот объект?
+
+# Page Items
+This page will be filled with content in the future: Эта страница будет наполнена контентом в будущем
+
+# Page Invoices
+Buyer: Покупатель
+Download: Скачать
+Seller: Продавец
+Invoice: Накладная
+Order date: Дата выписки
+Delivery date: Дата поставки
+Carrier: Перевозчик
+Attached document: Прилигаемый документ
+Loading point: Пункт погрузки
+Unloading point: Пункт разгрузки
+Approved by employee: Отпуск разрешил
+Processed by employee: Обработал
+
+# Page Companies
+Name: Имя
+Create Invoice: Создать Накладную
+Type: Тип
+Affiliate number: Номер филиала
+Fiscal code: Фискальный код
+Company: Компания
+Company kind: Тип
+Bank affiliate: Филиал банка
+
+# Page Addresses
+Address: Адрес
+Company Address: Адрес Компании
+
+# Page Users
+Username: Имя пользователя
+Password: Пароль
+Repeat Password: Повторите Пароль
+User: Пользователь
+
+# Page Company Kinds
+Company Kinds: Типы Компаний
+Company Kind: Тип Компании
+Type Name: Тип
+
+# Page Company Employees
+Position: Должность
+Company Employee: Сотрудник Компании
+
+# Page Bank Affiliates
+Number: Номер
+Bank Affiliate: Филиал Банка
+
+# Page Banks
+Bank: Банк
