@@ -71,10 +71,10 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @param Company $company
+     * @param Company|null $company
      * @return User
      */
-    public function setCompany(Company $company): User
+    public function setCompany(?Company $company): User
     {
         $this->company = $company;
 
