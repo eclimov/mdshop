@@ -12,7 +12,7 @@
     <p>{% trans %}Affiliate number{% endtrans %}: {{ company.bankAffiliate.affiliateNumber }}</p>
     <p>{% trans %}Fiscal code{% endtrans %}: {{ company.fiscalCode }}</p>
     <p>IBAN: {{ company.iban }}</p>
-    <p>VAT: {{ company.vat }}</p>
+    <p>{% trans %}VAT{% endtrans %}: {{ company.vat }}</p>
     <p>{% trans %}Created At{% endtrans %}: {{ company.createdAt|date("d/m/Y") }}</p>
     <p>
         <a href="{{ url('invoice.create', {id: company.id}) }}" class="btn btn-dark ml-auto">{% trans %}Create Invoice{% endtrans %}</a>
