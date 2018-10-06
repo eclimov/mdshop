@@ -19,8 +19,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class UserController extends AbstractController {
     /**
-     * @Route("/user", name="list")
-     * @Method("GET")
+     * @Route("/user", name="list", methods={"GET"})
      * @return Response
      * @throws \LogicException
      */
