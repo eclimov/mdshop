@@ -54,12 +54,13 @@ class InvoiceGenerator
             . ' ' . $seller->getAddresses()[0]->getAddress()
         );
         $buyer = $invoice->getBuyer();
+        $buyerAddresses = $buyer->getAddresses();
         $sheet->setCellValue(
             'C6',
             '"' . $buyer->getFullName()
             . ' IBAN ' . $buyer->getIban()
             . ' ' . $buyer->getBankAffiliate()->getAffiliateNumber()
-            . ' ' . $buyer->getAddresses()[0]->getAddress()
+            . ' ' . (\count($buyerAddresses) > 0 ? $buyerAddresses[0]->getAddress() : '')
         );
         $sheet->setCellValue(
             'O4',
@@ -77,13 +78,15 @@ class InvoiceGenerator
             'M7',
             $invoice->getAttachedDocument()
         );
+        $loadingPoint = $invoice->getLoadingPoint();
         $sheet->setCellValue(
             'C9',
-            $invoice->getLoadingPoint()->getAddress()
+            ($loadingPoint !== null) ? $loadingPoint->getAddress() : ''
         );
+        $unloadingPoint = $invoice->getUnloadingPoint();
         $sheet->setCellValue(
             'G9',
-            $invoice->getUnloadingPoint()->getAddress()
+            ($unloadingPoint !== null) ? $unloadingPoint->getAddress() : ''
         );
         $approvedByEmployee = $invoice->getApprovedByEmployee();
         $sheet->setCellValue(
