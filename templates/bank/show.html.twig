@@ -9,6 +9,7 @@
     } %}
     <h class="display-4">{{ bank.name }}</h>
     <p>{% trans %}Created At{% endtrans %}: {{ bank.createdAt|date("d/m/Y") }}</p>
+    <hr>
     {% include 'bankAffiliate/list.html.twig' with {
         'bank': bank,
     } %}

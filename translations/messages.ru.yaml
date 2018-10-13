@@ -49,6 +49,7 @@ Bank affiliate: Филиал банка
 
 # Page Addresses
 Address: Адрес
+Addresses: Адреса
 Company Address: Адрес Компании
 
 # Page Users
@@ -64,11 +65,13 @@ Type Name: Тип
 
 # Page Company Employees
 Position: Должность
+Employees: Сотрудники
 Company Employee: Сотрудник Компании
 
 # Page Bank Affiliates
 Number: Номер
 Bank Affiliate: Филиал Банка
+Affiliates: Филиалы
 
 # Page Banks
 Bank: Банк
