@@ -18,25 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class CompanyEmployeeController extends AbstractController {
     /**
-     * @Route("/companyEmployee", name="list")
-     * @Method("GET")
-     * @return Response
-     * @throws \LogicException
-     */
-    public function list(): Response
-    {
-        $companyEmployees = $this->getDoctrine()
-            ->getRepository(CompanyEmployee::class)
-            ->findAll();
-
-        return $this->render('companyAddress/list.html.twig', [
-            'companyEmployees' => $companyEmployees,
-        ]);
-    }
-
-    /**
-     * @Route("company/{id}/createCompanyEmployee", name="create", requirements={"id" = "\d+"})
-     * @Method({"GET", "POST"})
+     * @Route("company/{id}/employee/create", name="create", requirements={"id" = "\d+"}, methods={"GET", "POST"})
      * @param Request $request
      * @param EntityManagerInterface $em
      * @param Company $company
@@ -67,8 +49,7 @@ class CompanyEmployeeController extends AbstractController {
     }
 
     /**
-     * @Route("/companyEmployee/{id}/delete", name="delete", requirements={"id" = "\d+"})
-     * @Method({"DELETE", "POST"})
+     * @Route("/companyEmployee/{id}/delete", name="delete", requirements={"id" = "\d+"}, methods={"DELETE", "POST"})
      * @param CompanyEmployee $companyEmployee
      * @param EntityManagerInterface $em
      * @return Response
@@ -87,8 +68,7 @@ class CompanyEmployeeController extends AbstractController {
     }
 
     /**
-     * @Route("/companyEmployee/{id}/edit", name="edit", requirements={"id" = "\d+"})
-     * @Method({"GET", "POST"})
+     * @Route("/companyEmployee/{id}/edit", name="edit", requirements={"id" = "\d+"}, methods={"GET", "POST"})
      * @param Request $request
      * @param CompanyEmployee $companyEmployee
      * @param EntityManagerInterface $em

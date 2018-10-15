@@ -25,8 +25,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 class InvoiceController extends AbstractController {
     /**
-     * @Route("/invoice", name="list")
-     * @Method("GET")
+     * @Route("/invoice", name="list", methods={"GET"})
      * @return Response
      * @throws \LogicException
      */
@@ -42,8 +41,7 @@ class InvoiceController extends AbstractController {
     }
 
     /**
-     * @Route("/invoice/{id}/edit", name="edit", requirements={"id" = "\d+"})
-     * @Method({"GET", "POST"})
+     * @Route("/invoice/{id}/edit", name="edit", requirements={"id" = "\d+"}, methods={"GET", "POST"})
      * @param Request $request
      * @param Invoice $invoice
      * @param EntityManagerInterface $em
@@ -77,8 +75,7 @@ class InvoiceController extends AbstractController {
     }
 
     /**
-     * @Route("company/{id}/createInvoice", name="create", requirements={"id" = "\d+"})
-     * @Method({"GET", "POST"})
+     * @Route("company/{id}/invoice/create", name="create", requirements={"id" = "\d+"}, methods={"GET", "POST"})
      * @param Request $request
      * @param EntityManagerInterface $em
      * @param Company $company
@@ -119,8 +116,7 @@ class InvoiceController extends AbstractController {
     }
 
     /**
-     * @Route("invoice/{id}", name="view", requirements={"id" = "\d+"})
-     * @Method("GET")
+     * @Route("invoice/{id}", name="view", requirements={"id" = "\d+"}, methods={"GET"})
      * @param Invoice $invoice
      * @return Response
      */
@@ -135,8 +131,7 @@ class InvoiceController extends AbstractController {
     }
 
     /**
-     * @Route("/invoice/{id}/delete", name="delete", requirements={"id" = "\d+"})
-     * @Method({"DELETE", "POST"})
+     * @Route("/invoice/{id}/delete", name="delete", requirements={"id" = "\d+"}, methods={"DELETE", "POST"})
      * @param Invoice $invoice
      * @param EntityManagerInterface $em
      * @return Response
@@ -164,8 +159,7 @@ class InvoiceController extends AbstractController {
     }
 
     /**
-     * @Route("invoice/{id}/download", name="download", requirements={"id" = "\d+"})
-     * @Method("GET")
+     * @Route("invoice/{id}/download", name="download", requirements={"id" = "\d+"}, methods={"GET"})
      * @param Invoice $invoice
      * @param InvoiceGenerator $invoiceGenerator
      * @return Response

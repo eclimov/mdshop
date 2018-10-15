@@ -17,8 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class CompanyController extends AbstractController {
     /**
-     * @Route("/company", name="list")
-     * @Method("GET")
+     * @Route("/company", name="list", methods={"GET"})
      * @return Response
      * @throws \LogicException
      */
@@ -34,8 +33,7 @@ class CompanyController extends AbstractController {
     }
 
     /**
-     * @Route("company/{id}", name="view", requirements={"id" = "\d+"})
-     * @Method("GET")
+     * @Route("company/{id}", name="view", requirements={"id" = "\d+"}, methods={"GET"})
      * @param Company $company
      * @return Response
      */
@@ -50,8 +48,7 @@ class CompanyController extends AbstractController {
     }
 
     /**
-     * @Route("company/create", name="create")
-     * @Method({"GET", "POST"})
+     * @Route("company/create", name="create", methods={"GET", "POST"})
      * @param Request $request
      * @param EntityManagerInterface $em
      * @return Response
@@ -79,8 +76,7 @@ class CompanyController extends AbstractController {
     }
 
     /**
-     * @Route("/company/{id}/delete", name="delete", requirements={"id" = "\d+"})
-     * @Method({"DELETE", "POST"})
+     * @Route("/company/{id}/delete", name="delete", requirements={"id" = "\d+"}, methods={"DELETE", "POST"})
      * @param Company $company
      * @param EntityManagerInterface $em
      * @return Response
@@ -96,8 +92,7 @@ class CompanyController extends AbstractController {
     }
 
     /**
-     * @Route("/company/{id}/edit", name="edit", requirements={"id" = "\d+"})
-     * @Method({"GET", "POST"})
+     * @Route("/company/{id}/edit", name="edit", requirements={"id" = "\d+"}, methods={"GET", "POST"})
      * @param Request $request
      * @param Company $company
      * @param EntityManagerInterface $em

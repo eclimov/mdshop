@@ -17,8 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class BankController extends AbstractController {
     /**
-     * @Route("/bank", name="list")
-     * @Method("GET")
+     * @Route("/bank", name="list", methods={"GET"})
      * @return Response
      * @throws \LogicException
      */
@@ -34,8 +33,7 @@ class BankController extends AbstractController {
     }
 
     /**
-     * @Route("bank/{id}", name="view", requirements={"id" = "\d+"})
-     * @Method("GET")
+     * @Route("bank/{id}", name="view", requirements={"id" = "\d+"}, methods={"GET"})
      * @param Bank $bank
      * @return Response
      */
@@ -50,8 +48,7 @@ class BankController extends AbstractController {
     }
 
     /**
-     * @Route("bank/create", name="create")
-     * @Method({"GET", "POST"})
+     * @Route("bank/create", name="create", methods={"GET", "POST"})
      * @param Request $request
      * @param EntityManagerInterface $em
      * @return Response
@@ -80,8 +77,7 @@ class BankController extends AbstractController {
     }
 
     /**
-     * @Route("/bank/{id}/delete", name="delete", requirements={"id" = "\d+"})
-     * @Method({"DELETE", "POST"})
+     * @Route("/bank/{id}/delete", name="delete", requirements={"id" = "\d+"}, methods={"DELETE", "POST"})
      * @param Bank $bank
      * @param EntityManagerInterface $em
      * @return Response
@@ -97,8 +93,7 @@ class BankController extends AbstractController {
     }
 
     /**
-     * @Route("/bank/{id}/edit", name="edit", requirements={"id" = "\d+"})
-     * @Method({"GET", "POST"})
+     * @Route("/bank/{id}/edit", name="edit", requirements={"id" = "\d+"}, methods={"GET", "POST"})
      * @param Request $request
      * @param Bank $bank
      * @param EntityManagerInterface $em

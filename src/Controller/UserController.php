@@ -7,7 +7,6 @@ use App\Form\UserType;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,8 +34,7 @@ class UserController extends AbstractController {
     }
 
     /**
-     * @Route("user/create", name="create")
-     * @Method({"GET", "POST"})
+     * @Route("user/create", name="create", methods={"GET", "POST"})
      * @param Request $request
      * @param EntityManagerInterface $em
      * @param UserPasswordEncoderInterface $passwordEncoder
@@ -69,8 +67,7 @@ class UserController extends AbstractController {
     }
 
     /**
-     * @Route("/user/{id}/delete", name="delete", requirements={"id" = "\d+"})
-     * @Method({"DELETE", "POST"})
+     * @Route("/user/{id}/delete", name="delete", requirements={"id" = "\d+"}, methods={"DELETE", "POST"})
      * @param User $user
      * @param EntityManagerInterface $em
      * @return Response
@@ -90,8 +87,7 @@ class UserController extends AbstractController {
     }
 
     /**
-     * @Route("/user/{id}/edit", name="edit", requirements={"id" = "\d+"})
-     * @Method({"GET", "POST"})
+     * @Route("/user/{id}/edit", name="edit", requirements={"id" = "\d+"}, methods={"GET", "POST"})
      * @param Request $request
      * @param User $user
      * @param EntityManagerInterface $em
@@ -123,8 +119,7 @@ class UserController extends AbstractController {
     }
 
     /**
-     * @Route("/user/locale/en", name="set_locale_en")
-     * @Method({"GET", "POST"})
+     * @Route("/user/locale/en", name="set_locale_en", methods={"GET", "POST"})
      * @param Request $request
      * @return Response
      */
@@ -137,8 +132,7 @@ class UserController extends AbstractController {
     }
 
     /**
-     * @Route("/user/locale/ru", name="set_locale_ru")
-     * @Method({"GET", "POST"})
+     * @Route("/user/locale/ru", name="set_locale_ru", methods={"GET", "POST"})
      * @param Request $request
      * @return Response
      */

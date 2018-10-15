@@ -7,7 +7,6 @@ use App\Entity\CompanyAddress;
 use App\Form\CompanyAddressType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,25 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class CompanyAddressController extends AbstractController {
     /**
-     * @Route("/companyAddress", name="list")
-     * @Method("GET")
-     * @return Response
-     * @throws \LogicException
-     */
-    public function list(): Response
-    {
-        $companyAddresses = $this->getDoctrine()
-            ->getRepository(CompanyAddress::class)
-            ->findAll();
-
-        return $this->render('companyAddress/list.html.twig', [
-            'companyAddresses' => $companyAddresses,
-        ]);
-    }
-
-    /**
-     * @Route("company/{id}/createCompanyAddress", name="create", requirements={"id" = "\d+"})
-     * @Method({"GET", "POST"})
+     * @Route("company/{id}/address/create", name="create", requirements={"id" = "\d+"}, methods={"GET", "POST"})
      * @param Request $request
      * @param EntityManagerInterface $em
      * @param Company $company
@@ -67,8 +48,7 @@ class CompanyAddressController extends AbstractController {
     }
 
     /**
-     * @Route("/companyAddress/{id}/delete", name="delete", requirements={"id" = "\d+"})
-     * @Method({"DELETE", "POST"})
+     * @Route("/companyAddress/{id}/delete", name="delete", requirements={"id" = "\d+"}, methods={"DELETE", "POST"})
      * @param CompanyAddress $companyAddress
      * @param EntityManagerInterface $em
      * @return Response
@@ -87,8 +67,7 @@ class CompanyAddressController extends AbstractController {
     }
 
     /**
-     * @Route("/companyAddress/{id}/edit", name="edit", requirements={"id" = "\d+"})
-     * @Method({"GET", "POST"})
+     * @Route("/companyAddress/{id}/edit", name="edit", requirements={"id" = "\d+"}, methods={"GET", "POST"})
      * @param Request $request
      * @param CompanyAddress $companyAddress
      * @param EntityManagerInterface $em
