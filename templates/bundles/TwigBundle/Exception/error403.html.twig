@@ -1,1 +1,16 @@
-No access
+{#
+Advanced handler:
+https://symfony.com/doc/current/security/access_denied_handler.html
+#}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}No access{% endtrans %}{% endblock %}
+
+{% block body %}
+    <div class="container mt-3 mb-4">
+        <p class="text-muted font-weight-bold">
+            {% trans %}You have insufficient rights to access this page{% endtrans %}
+        </p>
+    </div>
+{% endblock %}
