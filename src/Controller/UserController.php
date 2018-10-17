@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\UserType;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,6 +40,7 @@ class UserController extends AbstractController {
      * @param EntityManagerInterface $em
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function create(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder): Response
     {
@@ -71,6 +73,7 @@ class UserController extends AbstractController {
      * @param User $user
      * @param EntityManagerInterface $em
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(User $user, EntityManagerInterface $em): Response
     {
@@ -93,6 +96,7 @@ class UserController extends AbstractController {
      * @param EntityManagerInterface $em
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, User $user, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder): Response
     {

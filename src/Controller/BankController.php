@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Bank;
 use App\Form\BankType;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Form\FormInterface;
@@ -52,6 +53,7 @@ class BankController extends AbstractController {
      * @param Request $request
      * @param EntityManagerInterface $em
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function create(Request $request, EntityManagerInterface $em): Response
     {
@@ -81,6 +83,7 @@ class BankController extends AbstractController {
      * @param Bank $bank
      * @param EntityManagerInterface $em
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Bank $bank, EntityManagerInterface $em): Response
     {
@@ -98,6 +101,7 @@ class BankController extends AbstractController {
      * @param Bank $bank
      * @param EntityManagerInterface $em
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Bank $bank, EntityManagerInterface $em): Response
     {

@@ -18,7 +18,6 @@ class ItemController extends AbstractController {
     /**
      * @Route("/", name="list", methods={"GET"})
      * @return Response
-     * @IsGranted("ROLE_USER")
      */
     public function list(): Response
     {

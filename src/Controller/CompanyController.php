@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Company;
 use App\Form\CompanyType;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Form\FormInterface;
@@ -52,6 +53,7 @@ class CompanyController extends AbstractController {
      * @param Request $request
      * @param EntityManagerInterface $em
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function create(Request $request, EntityManagerInterface $em): Response
     {
@@ -80,6 +82,7 @@ class CompanyController extends AbstractController {
      * @param Company $company
      * @param EntityManagerInterface $em
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Company $company, EntityManagerInterface $em): Response
     {
@@ -97,6 +100,7 @@ class CompanyController extends AbstractController {
      * @param Company $company
      * @param EntityManagerInterface $em
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Company $company, EntityManagerInterface $em): Response
     {

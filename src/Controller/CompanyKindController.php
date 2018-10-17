@@ -2,12 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\Company;
 use App\Entity\CompanyKind;
 use App\Form\CompanyKindType;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -38,6 +37,7 @@ class CompanyKindController extends AbstractController {
      * @param Request $request
      * @param EntityManagerInterface $em
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function create(Request $request, EntityManagerInterface $em): Response
     {
@@ -66,6 +66,7 @@ class CompanyKindController extends AbstractController {
      * @param CompanyKind $companyKind
      * @param EntityManagerInterface $em
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(CompanyKind $companyKind, EntityManagerInterface $em): Response
     {
@@ -83,6 +84,7 @@ class CompanyKindController extends AbstractController {
      * @param CompanyKind $companyKind
      * @param EntityManagerInterface $em
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, CompanyKind $companyKind, EntityManagerInterface $em): Response
     {

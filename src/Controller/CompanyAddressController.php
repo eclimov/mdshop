@@ -6,6 +6,7 @@ use App\Entity\Company;
 use App\Entity\CompanyAddress;
 use App\Form\CompanyAddressType;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route(name="companyAddress.")
+ * @IsGranted("ROLE_ADMIN")
  */
 class CompanyAddressController extends AbstractController {
     /**

@@ -11,6 +11,7 @@
                 <th>Email</th>
                 <th>{% trans %}Company{% endtrans %}</th>
                 <th>{% trans %}Created At{% endtrans %}</th>
+                <th>{% trans %}Role{% endtrans %}</th>
                 <th style="text-align: center;">{% trans %}Actions{% endtrans %}</th>
             </tr>
             {% for user in users %}
@@ -25,6 +26,7 @@
                         {{ user.company ? user.company.fullName }}
                     </td>
                     <td>{{ user.createdAt|date("d/m/Y h:s") }}</td>
+                    <td>{{ user.role }}</td>
                     <td style="text-align: center;">
                         <div>
                             <a href="{{ url('user.edit', {id: user.id}) }}" style="margin: 5px; text-decoration: none;">

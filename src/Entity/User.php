@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -17,6 +18,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, \Serializable
 {
+    public const ROLES = [
+        'ROLE_USER',
+        'ROLE_SUPER_USER',
+        'ROLE_ADMIN',
+    ];
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -56,6 +63,12 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $createdAt;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=false)
+     */
+    private $role;
 
     public function __construct()
     {
@@ -104,9 +117,23 @@ class User implements UserInterface, \Serializable
         return $this->password;
     }
 
+    public function setRole(string $role)
+    {
+        if(\in_array($role, self::ROLES, true)) {
+            $this->role = $role;
+        }
+
+        return $this;
+    }
+
+    public function getRole()
+    {
+        return $this->role;
+    }
+
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return array_unique(array_merge(['ROLE_USER'], [$this->role,]));
     }
 
     public function eraseCredentials()

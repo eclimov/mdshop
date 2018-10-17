@@ -6,6 +6,7 @@ use App\Entity\Company;
 use App\Entity\CompanyEmployee;
 use App\Form\CompanyEmployeeType;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Form\FormInterface;
@@ -15,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route(name="companyEmployee.")
+ * @IsGranted("ROLE_ADMIN")
  */
 class CompanyEmployeeController extends AbstractController {
     /**

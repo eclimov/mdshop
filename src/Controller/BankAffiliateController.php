@@ -6,6 +6,7 @@ use App\Entity\Bank;
 use App\Entity\BankAffiliate;
 use App\Form\BankAffiliateType;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Form\FormInterface;
@@ -15,24 +16,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route(name="bankAffiliate.")
+ * @IsGranted("ROLE_ADMIN")
  */
 class BankAffiliateController extends AbstractController {
-    /**
-     * @Route("/bankAffiliate", name="list", methods={"GET"})
-     * @return Response
-     * @throws \LogicException
-     */
-    public function list(): Response
-    {
-        $bankAffiliates = $this->getDoctrine()
-            ->getRepository(BankAffiliate::class)
-            ->findAll();
-
-        return $this->render('bank/list.html.twig', [
-            'bankAffiliates' => $bankAffiliates,
-        ]);
-    }
-
     /**
      * @Route("bank/{id}/affiliate/create", name="create", requirements={"id" = "\d+"}, methods={"GET", "POST"})
      * @param Request $request
