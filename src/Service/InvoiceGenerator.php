@@ -33,6 +33,11 @@ class InvoiceGenerator
             ->getSpreadSheet($this->getInvoiceDirectory() . '/' . 'template.xlsx');
 
         $sheet = $spreadsheet->getActiveSheet();
+
+        $seller = $invoice->getSeller();
+        $buyer = $invoice->getBuyer();
+        $carrier = $invoice->getCarrier();
+
         $sheet->setCellValue(
             'C2',
             $invoice->getOrderDate()->format('d.m.Y')
@@ -43,9 +48,8 @@ class InvoiceGenerator
         );
         $sheet->setCellValue(
             'I4',
-            $invoice->getCarrier()->getFullName()
+            $carrier->getFullName()
         );
-        $seller = $invoice->getSeller();
         $sheet->setCellValue(
             'C5',
             '"' . $seller->getFullName()
@@ -53,7 +57,6 @@ class InvoiceGenerator
             . ' ' . $seller->getBankAffiliate()->getAffiliateNumber()
             . ' ' . $seller->getAddresses()[0]->getAddress()
         );
-        $buyer = $invoice->getBuyer();
         $buyerAddresses = $buyer->getAddresses();
         $sheet->setCellValue(
             'C6',
@@ -64,7 +67,7 @@ class InvoiceGenerator
         );
         $sheet->setCellValue(
             'O4',
-            $seller->getFiscalCode() . ' / ' . $seller->getVat()
+            $carrier->getFiscalCode() . ' / ' . $carrier->getVat()
         );
         $sheet->setCellValue(
             'O5',
@@ -72,7 +75,7 @@ class InvoiceGenerator
         );
         $sheet->setCellValue(
             'O6',
-            $seller->getFiscalCode() . ' / ' . $seller->getVat()
+            $buyer->getFiscalCode() . ' / ' . $buyer->getVat()
         );
         $sheet->setCellValue(
             'M7',
