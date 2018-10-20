@@ -45,14 +45,13 @@ class UserController extends AbstractController {
     public function create(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user, [
+            'method' => 'POST',
+            'password_encoder' => $passwordEncoder,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = $user->getPassword();
-            $passwordEncoded = $passwordEncoder->encodePassword($user, $password);
-            $user->setPassword($passwordEncoded);
-
             $em->persist($user);
             $em->flush();
 
@@ -90,7 +89,7 @@ class UserController extends AbstractController {
     }
 
     /**
-     * @Route("/user/{id}/edit", name="edit", requirements={"id" = "\d+"}, methods={"GET", "POST"})
+     * @Route("/user/{id}/edit", name="edit", requirements={"id" = "\d+"}, methods={"GET", "PATCH"})
      * @param Request $request
      * @param User $user
      * @param EntityManagerInterface $em
@@ -100,20 +99,26 @@ class UserController extends AbstractController {
      */
     public function edit(Request $request, User $user, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder): Response
     {
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
+        $form = $this->createForm(UserType::class, $user, [
+            'method' => 'PATCH',
+            'password_encoder' => $passwordEncoder,
+        ]);
+
+        if($request->isMethod('GET')) {
+            $form->handleRequest($request);
+        } else if($request->isMethod('PATCH')) {
+            $form->submit($request->request->get($form->getName()), false);
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = $user->getPassword();
-            $passwordEncoded = $passwordEncoder->encodePassword($user, $password);
-            $user->setPassword($passwordEncoded);
-
             $em->flush();
 
             $this->addFlash('notice', 'User info has been updated');
 
             return $this->redirectToRoute(
-                'user.list'
+                'user.edit', [
+                    'id' => $user->getId()
+                ]
             );
         }
 

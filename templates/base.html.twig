@@ -16,10 +16,10 @@
         {% if app.user %}
             <a href="{{ url('invoice.list') }}" class="btn btn-link">{% trans %}Invoices{% endtrans %}</a>
             <a href="{{ url('company.list') }}" class="btn btn-link">{% trans %}Companies{% endtrans %}</a>
+            <a href="{{ url('bank.list') }}" class="btn btn-link">{% trans %}Banks{% endtrans %}</a>
 
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ url('companyKind.list') }}" class="btn btn-link">{% trans %}Company kinds{% endtrans %}</a>
-                <a href="{{ url('bank.list') }}" class="btn btn-link">{% trans %}Banks{% endtrans %}</a>
                 <a href="{{ url('user.list') }}" class="btn btn-link">{% trans %}Users{% endtrans %}</a>
             {% endif %}
 
