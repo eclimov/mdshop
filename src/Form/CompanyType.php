@@ -37,6 +37,8 @@ class CompanyType extends AbstractType
                 ],
                 'attr' => [
                     'autofocus' => true,
+                    'autocomplete' => 'off',
+
                 ],
             ])
             ->add('companyKind', EntityType::class, [
@@ -60,17 +62,26 @@ class CompanyType extends AbstractType
                     new NotBlank(),
                     new Length(['max' => 255,]),
                 ],
+                'attr' => [
+                    'autocomplete' => 'off',
+                ],
             ])
             ->add('fiscalCode', TextType::class, [
                 'constraints' => [
                     new NotBlank(),
-                    new Length(['max' => 255,]),
+                    new Length(['max' => 13,]),
+                ],
+                'attr' => [
+                    'autocomplete' => 'off',
                 ],
             ])
             ->add('vat', TextType::class, [
                 'constraints' => [
                     new NotBlank(),
-                    new Length(['max' => 255,]),
+                    new Length(['max' => 7,]),
+                ],
+                'attr' => [
+                    'autocomplete' => 'off',
                 ],
             ]);
     }

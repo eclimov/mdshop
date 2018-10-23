@@ -33,8 +33,16 @@ class UserType extends AbstractType
                 'required' => false,
                 'placeholder' => '-'
             ])
-            ->add('email', EmailType::class)
-            ->add('username', TextType::class)
+            ->add('email', EmailType::class, [
+                'attr' => [
+                    'autocomplete' => 'off',
+                ],
+            ])
+            ->add('username', TextType::class, [
+                'attr' => [
+                    'autocomplete' => 'off',
+                ],
+            ])
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $user = $event->getData();
                 $form = $event->getForm();

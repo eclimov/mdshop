@@ -27,6 +27,7 @@ class CompanyAddressType extends AbstractType
                 ],
                 'attr' => [
                     'autofocus' => true,
+                    'autocomplete' => 'off',
                 ],
             ]);
     }

@@ -27,6 +27,7 @@ class CompanyKindType extends AbstractType
                 ],
                 'attr' => [
                     'autofocus' => true,
+                    'autocomplete' => 'off',
                 ],
             ]);
     }

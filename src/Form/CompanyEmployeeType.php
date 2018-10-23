@@ -27,9 +27,17 @@ class CompanyEmployeeType extends AbstractType
                 ],
                 'attr' => [
                     'autofocus' => true,
+                    'autocomplete' => 'off',
                 ],
             ])
-            ->add('position', TextType::class, []);
+            ->add('position', TextType::class, [
+                'constraints' => [
+                    new Length(['max' => 255,]),
+                ],
+                'attr' => [
+                    'autocomplete' => 'off',
+                ],
+            ]);
     }
 
     /**

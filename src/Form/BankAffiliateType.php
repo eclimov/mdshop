@@ -27,6 +27,7 @@ class BankAffiliateType extends AbstractType
                 ],
                 'attr' => [
                     'autofocus' => true,
+                    'autocomplete' => 'off',
                 ],
             ]);
     }

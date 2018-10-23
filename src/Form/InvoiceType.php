@@ -56,6 +56,7 @@ class InvoiceType extends AbstractType
                 ],
                 'attr' => [
                     'placeholder' => '-',
+                    'autocomplete' => 'off',
                 ],
                 'empty_data' => '-',
             ])

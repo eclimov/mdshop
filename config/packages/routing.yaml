@@ -9,3 +9,8 @@ login_gate:
         max_count_attempts: 3
         timeout: 600 #Ban period (sec)
         # watch_period: 3600 #Only for databases storage. Period of actuality attempts
+
+# Disable deprecated annotations
+sensio_framework_extra:
+    router:
+        annotations: false
