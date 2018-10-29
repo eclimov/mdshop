@@ -1,7 +1,6 @@
 # Navbar
 Invoices: Накладные
 Companies: Компании
-Company kinds: Типы компаний
 Banks: Банки
 Users: Пользователи
 Login: Войти
@@ -45,8 +44,8 @@ Type: Тип
 Affiliate number: Номер филиала
 Fiscal code: Фискальный код
 Company: Компания
-Company kind: Тип
 Bank affiliate: Филиал банка
+Short name: Сокращённое имя
 
 # Page Addresses
 Address: Адрес
@@ -59,11 +58,6 @@ Password: Пароль
 Repeat Password: Повторите Пароль
 User: Пользователь
 Role: Роль
-
-# Page Company Kinds
-Company Kinds: Типы Компаний
-Company Kind: Тип Компании
-Type Name: Тип
 
 # Page Company Employees
 Position: Должность

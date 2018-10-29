@@ -20,16 +20,13 @@ class CompanyFixtures extends Fixture implements DependentFixtureInterface
 
         for ($i = 0; $i < 20; $i++) {
             $company = new Company();
-            $company->setName($faker->company);
+            $companyName = $faker->company;
+            $company->setName($companyName);
+            $company->setShortName(substr($companyName, 0, 25));
             $company->setBankAffiliate($this->getReference('bankAffiliate_' . $faker->numberBetween(0,9)));
             $company->setFiscalCode($faker->randomAscii);
             $company->setIban($faker->iban(373));
             $company->setVat($faker->randomAscii);
-            $company->setCompanyKind(
-                $this->getReference(
-                    'companyKind' . $faker->randomElement(['Srl', 'Sa',])
-                )
-            );
 
             $manager->persist($company);
             $this->addReference('company_' . $i, $company);
@@ -45,7 +42,6 @@ class CompanyFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             BankAffiliateFixtures::class,
-            CompanyKindFixtures::class,
         ];
     }
 }

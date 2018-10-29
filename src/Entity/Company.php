@@ -28,6 +28,12 @@ class Company{
 
     /**
      * @var string
+     * @ORM\Column(type="string", length=40)
+     */
+    private $shortName;
+
+    /**
+     * @var string
      * @ORM\Column(type="string", length=255)
      */
     private $iban;
@@ -68,13 +74,6 @@ class Company{
      * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $bankAffiliate;
-
-    /**
-     * @var CompanyKind
-     * @ORM\ManyToOne(targetEntity="App\Entity\CompanyKind")
-     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
-     */
-    private $companyKind;
 
     public function __construct()
     {
@@ -224,25 +223,6 @@ class Company{
     }
 
     /**
-     * @return CompanyKind|null
-     */
-    public function getCompanyKind(): ?CompanyKind
-    {
-        return $this->companyKind;
-    }
-
-    /**
-     * @param CompanyKind $companyKind
-     * @return Company
-     */
-    public function setCompanyKind(CompanyKind $companyKind): Company
-    {
-        $this->companyKind = $companyKind;
-
-        return $this;
-    }
-
-    /**
      * @return BankAffiliate|null
      */
     public function getBankAffiliate(): ?BankAffiliate
@@ -295,14 +275,6 @@ class Company{
     }
 
     /**
-     * @return string
-     */
-    public function getFullName(): string
-    {
-        return '"' . $this->name . '" ' . $this->getCompanyKind()->getName();
-    }
-
-    /**
      * @param string $name
      * @return Company
      */
@@ -319,6 +291,25 @@ class Company{
     public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getShortName(): ?string
+    {
+        return $this->shortName;
+    }
+
+    /**
+     * @param string $shortName
+     * @return Company
+     */
+    public function setShortName(string $shortName): Company
+    {
+        $this->shortName = $shortName;
+
+        return $this;
     }
 
     /**

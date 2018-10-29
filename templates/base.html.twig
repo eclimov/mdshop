@@ -19,7 +19,6 @@
             <a href="{{ url('bank.list') }}" class="btn btn-link">{% trans %}Banks{% endtrans %}</a>
 
             {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ url('companyKind.list') }}" class="btn btn-link">{% trans %}Company kinds{% endtrans %}</a>
                 <a href="{{ url('user.list') }}" class="btn btn-link">{% trans %}Users{% endtrans %}</a>
             {% endif %}
 

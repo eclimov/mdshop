@@ -45,7 +45,7 @@ class InvoiceType extends AbstractType
             ->add('carrier', EntityType::class, [
                 'class' => Company::class,
                 'choice_label' => function(Company $company) {
-                    return $company->getFullName();
+                    return $company->getName();
                 },
                 'preferred_choices' => [$company,],
             ])

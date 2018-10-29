@@ -48,11 +48,11 @@ class InvoiceGenerator
         );
         $sheet->setCellValue(
             'I4',
-            $carrier->getFullName()
+            $carrier->getShortName()
         );
         $sheet->setCellValue(
             'C5',
-            '"' . $seller->getFullName()
+            $seller->getName()
             . ' IBAN ' . $seller->getIban()
             . ' ' . $seller->getBankAffiliate()->getAffiliateNumber()
             . ' ' . $seller->getAddresses()[0]->getAddress()
@@ -60,7 +60,7 @@ class InvoiceGenerator
         $buyerAddresses = $buyer->getAddresses();
         $sheet->setCellValue(
             'C6',
-            '"' . $buyer->getFullName()
+            $buyer->getName()
             . ' IBAN ' . $buyer->getIban()
             . ' ' . $buyer->getBankAffiliate()->getAffiliateNumber()
             . ' ' . (\count($buyerAddresses) > 0 ? $buyerAddresses[0]->getAddress() : '')

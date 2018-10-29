@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Company;
-use App\Entity\CompanyKind;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -38,14 +37,16 @@ class CompanyType extends AbstractType
                 'attr' => [
                     'autofocus' => true,
                     'autocomplete' => 'off',
-
                 ],
             ])
-            ->add('companyKind', EntityType::class, [
-                'class' => CompanyKind::class,
-                'choice_label' => 'name',
+            ->add('shortName', TextType::class, [
                 'constraints' => [
                     new NotBlank(),
+                    new Length(['max' => 25,]),
+                ],
+                'attr' => [
+                    'maxlength' => '25',
+                    'autocomplete' => 'off',
                 ],
             ])
             ->add('bankAffiliate', EntityType::class, [

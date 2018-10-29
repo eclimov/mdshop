@@ -8,7 +8,6 @@
         'urlEdit': url('company.edit', {id: company.id})
     } %}
     <h class="display-4">{{ company.name }}</h>
-    <p>{% trans %}Type{% endtrans %}: {{ company.companyKind ? company.companyKind.name : '-' }}</p>
     <p>{% trans %}Affiliate number{% endtrans %}: {{ company.bankAffiliate.affiliateNumber }}</p>
     <p>{% trans %}Fiscal code{% endtrans %}: {{ company.fiscalCode }}</p>
     <p>IBAN: {{ company.iban }}</p>
