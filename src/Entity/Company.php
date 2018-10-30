@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\CompanyRepository")
  * @ORM\Table(name="companies")
  * @ORM\HasLifecycleCallbacks()
  */
@@ -75,10 +75,17 @@ class Company{
      */
     private $bankAffiliate;
 
+    /**
+     * @var bool
+     * @ORM\Column(name="is_hidden", type="boolean", nullable=false)
+     */
+    private $hidden;
+
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
         $this->employees = new ArrayCollection();
+        $this->hidden = false;  // default value
     }
 
     /**
@@ -308,6 +315,25 @@ class Company{
     public function setShortName(string $shortName): Company
     {
         $this->shortName = $shortName;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isHidden()
+    {
+        return $this->hidden;
+    }
+
+    /**
+     * @param bool $hidden
+     * @return Company
+     */
+    public function setHidden(bool $hidden)
+    {
+        $this->hidden = $hidden;
 
         return $this;
     }

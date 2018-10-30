@@ -27,6 +27,7 @@ class CompanyFixtures extends Fixture implements DependentFixtureInterface
             $company->setFiscalCode($faker->randomAscii);
             $company->setIban($faker->iban(373));
             $company->setVat($faker->randomAscii);
+            $company->setHidden($faker->boolean);
 
             $manager->persist($company);
             $this->addReference('company_' . $i, $company);

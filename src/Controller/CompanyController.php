@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Company;
+use App\Entity\User;
 use App\Form\CompanyType;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -10,8 +11,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 /**
  * @Route(name="company.")
@@ -26,7 +30,9 @@ class CompanyController extends AbstractController {
     {
         $companies = $this->getDoctrine()
             ->getRepository(Company::class)
-            ->findAll();
+            ->findVisibleToUser(
+                $this->getUser()
+            );
 
         return $this->render('company/list.html.twig', [
             'companies' => $companies,
@@ -40,6 +46,13 @@ class CompanyController extends AbstractController {
      */
     public function view(Company $company): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        if ($user->getRole() !== 'ROLE_ADMIN' && $company->isHidden()) {
+            throw new AccessDeniedHttpException();
+        }
+
         $deleteForm = $this->createDeleteForm($company);
 
         return $this->render('company/show.html.twig', [
