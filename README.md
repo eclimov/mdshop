@@ -14,7 +14,7 @@
    4. Install docker-compose  
    <code>sudo curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose</code>  
    `sudo chmod +x /usr/local/bin/docker-compose`  
-   `docker-compose --version`  
+   `docker-compose --version`
    5. Install git  
    `sudo apt-get install git`    
    6. Check out SSH instructions:  
@@ -27,13 +27,13 @@
    within project's directory: `composer install`  
    9. Reboot  
    `sudo shutdown -r now`  
-   10. Check router:  
+   10. Check router:    
    `bin/console debug:router --env=prod`  
-   11. Add swap memory  
+   11. Add swap memory    
    `https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-16-04`  
-   12. Create 'uploads' directory and set the permissions from within container:  
+   12. Create 'uploads' directory and set the permissions from within container:    
    `chmod -R 777 public/uploads/`
-   13. Grant all permissions to 'uploads' directory on host:  
+   13. Grant all permissions to 'uploads' directory on host:    
    `sudo chmod -R 777 uploads`
 
 
