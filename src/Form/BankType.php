@@ -28,6 +28,7 @@ class BankType extends AbstractType
                 'attr' => [
                     'autofocus' => true,
                     'autocomplete' => 'off',
+                    'placeholder' => 'Bank abbreviation',
                 ],
             ]);
     }
