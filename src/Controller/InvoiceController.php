@@ -167,7 +167,10 @@ class InvoiceController extends AbstractController {
     public function download(Invoice $invoice, InvoiceGenerator $invoiceGenerator): Response
     {
         return $this->file(
-            $invoiceGenerator->generate($invoice)
+            $invoiceGenerator->generate(
+                $invoice,
+                $this->getDoctrine()
+            )
         );
     }
 }

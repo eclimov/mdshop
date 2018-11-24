@@ -68,7 +68,8 @@ class InvoiceType extends AbstractType
                         ->where('a.company = :company')
                         ->setParameters([
                             'company' => $companyInitiator,
-                        ]);
+                        ])
+                        ->orderBy('a.juridic', 'ASC');
                 },
             ])
             ->add('unloadingPoint', EntityType::class, [

@@ -19,6 +19,7 @@ class CompanyAddressFixtures extends Fixture implements DependentFixtureInterfac
         for ($i = 0; $i < 20; $i++) {
             $companyAddress = new CompanyAddress();
             $companyAddress->setAddress($faker->address);
+            $companyAddress->setJuridic($faker->boolean);
             $companyAddress->setCompany($this->getReference('company_' . $i));
 
             $manager->persist($companyAddress);

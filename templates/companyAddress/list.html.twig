@@ -7,12 +7,18 @@
         <table class="table table-hover table-sm">
             <tr class="thead-dark">
                 <th>{% trans %}Address{% endtrans %}</th>
+                <th>{% trans %}Juridic{% endtrans %}</th>
                 <th style="text-align: center;">{% trans %}Actions{% endtrans %}</th>
             </tr>
             {% for address in company.addresses %}
                 <tr>
                     <td>
                         {{ address.address }}
+                    </td>
+                    <td>
+                        {% if address.juridic %}
+                            ✔
+                        {% endif %}
                     </td>
                     <td style="text-align: center;">
                         <div>

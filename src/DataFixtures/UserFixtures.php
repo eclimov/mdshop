@@ -23,7 +23,11 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setEmail($faker->email);
             $user->setUsername('t' . $i);
             $user->setCompany($this->getReference('company_' . $i));
-            $user->setRole($faker->randomElement(User::ROLES));
+            if($i === 1) {
+                $user->setRole('ROLE_ADMIN');
+            } else {
+                $user->setRole($faker->randomElement(User::ROLES));
+            }
             $manager->persist($user);
         }
 

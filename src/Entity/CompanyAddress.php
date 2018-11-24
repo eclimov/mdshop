@@ -6,7 +6,7 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\CompanyAddressRepository")
  * @ORM\Table(name="company_addresses")
  * @ORM\HasLifecycleCallbacks()
  */
@@ -38,6 +38,17 @@ class CompanyAddress
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $createdAt;
+
+    /**
+     * @var bool
+     * @ORM\Column(name="is_juridic", type="boolean", nullable=false)
+     */
+    private $juridic;
+
+    public function __construct()
+    {
+        $this->juridic = false;  // default value
+    }
 
     /**
      * @return int
@@ -102,6 +113,25 @@ class CompanyAddress
     public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isJuridic(): ?bool
+    {
+        return $this->juridic;
+    }
+
+    /**
+     * @param bool $juridic
+     * @return CompanyAddress
+     */
+    public function setJuridic(bool $juridic): CompanyAddress
+    {
+        $this->juridic = $juridic;
+
+        return $this;
     }
 
     /**

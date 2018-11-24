@@ -2,8 +2,14 @@
 
 namespace App\Service;
 
+use App\Entity\Company;
+use App\Entity\CompanyAddress;
 use App\Entity\Invoice;
+use App\Repository\CompanyAddressRepository;
+use App\Repository\CompanyRepository;
 use App\Service\XlsProcessor;
+use Doctrine\ORM\EntityManager;
+use Symfony\Bridge\Doctrine\ManagerRegistry;
 
 class InvoiceGenerator
 {
@@ -27,7 +33,7 @@ class InvoiceGenerator
         $this->xlsProcessor = $xlsProcessor;
     }
 
-    public function generate(Invoice $invoice)
+    public function generate(Invoice $invoice, ManagerRegistry $doctrine)
     {
         $spreadsheet = $this->getXlsProcessor()
             ->getSpreadSheet($this->getInvoiceDirectory() . '/' . 'template.xlsx');
@@ -50,20 +56,26 @@ class InvoiceGenerator
             'I4',
             $carrier->getShortName()
         );
+
+        $sellerJuridicAddresses = $doctrine
+            ->getRepository(CompanyAddress::class)
+            ->findJuridicAddressesByCompany($seller);
         $sheet->setCellValue(
             'C5',
             $seller->getName()
             . ' IBAN ' . $seller->getIban()
             . ' ' . $seller->getBankAffiliate()->getAffiliateNumber()
-            . ' ' . $seller->getAddresses()[0]->getAddress()
+            . ' ' . $sellerJuridicAddresses[0]->getAddress()
         );
-        $buyerAddresses = $buyer->getAddresses();
+        $buyerJuridicAddresses = $doctrine
+            ->getRepository(CompanyAddress::class)
+            ->findJuridicAddressesByCompany($buyer);
         $sheet->setCellValue(
             'C6',
             $buyer->getName()
             . ' IBAN ' . $buyer->getIban()
             . ' ' . $buyer->getBankAffiliate()->getAffiliateNumber()
-            . ' ' . (\count($buyerAddresses) > 0 ? $buyerAddresses[0]->getAddress() : '')
+            . ' ' . (\count($buyerJuridicAddresses) > 0 ? $buyerJuridicAddresses[0]->getAddress() : '')
         );
         $sheet->setCellValue(
             'O4',
