@@ -23,7 +23,9 @@
                         {{ user.email }}
                     </td>
                     <td>
-                        {{ user.company ? user.company.name }}
+                        {% if user.company %}
+                            <a href="{{ url('company.view', {id: user.company.id}) }}">{{ user.company.name }}</a>
+                        {% endif %}
                     </td>
                     <td>{{ user.createdAt|date("d/m/Y h:s") }}</td>
                     <td>{{ user.role }}</td>
