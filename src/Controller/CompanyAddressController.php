@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route(name="companyAddress.")
- * @IsGranted("ROLE_ADMIN")
  */
 class CompanyAddressController extends AbstractController {
     /**
@@ -54,6 +53,7 @@ class CompanyAddressController extends AbstractController {
      * @param CompanyAddress $companyAddress
      * @param EntityManagerInterface $em
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(CompanyAddress $companyAddress, EntityManagerInterface $em): Response
     {

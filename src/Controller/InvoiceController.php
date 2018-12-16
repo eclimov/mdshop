@@ -8,6 +8,7 @@ use App\Form\InvoiceType;
 use App\Service\InvoiceGenerator;
 use App\Service\XlsProcessor;
 use Doctrine\ORM\EntityRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -135,6 +136,7 @@ class InvoiceController extends AbstractController {
      * @param Invoice $invoice
      * @param EntityManagerInterface $em
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Invoice $invoice, EntityManagerInterface $em): Response
     {

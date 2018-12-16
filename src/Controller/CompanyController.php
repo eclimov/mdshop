@@ -66,7 +66,6 @@ class CompanyController extends AbstractController {
      * @param Request $request
      * @param EntityManagerInterface $em
      * @return Response
-     * @IsGranted("ROLE_ADMIN")
      */
     public function create(Request $request, EntityManagerInterface $em): Response
     {
@@ -113,7 +112,6 @@ class CompanyController extends AbstractController {
      * @param Company $company
      * @param EntityManagerInterface $em
      * @return Response
-     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Company $company, EntityManagerInterface $em): Response
     {

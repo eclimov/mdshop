@@ -65,7 +65,7 @@ class InvoiceGenerator
             $seller->getName()
             . ' IBAN ' . $seller->getIban()
             . ' ' . $seller->getBankAffiliate()->getAffiliateNumber()
-            . ' ' . $sellerJuridicAddresses[0]->getAddress()
+            . ' a.j.' . $sellerJuridicAddresses[0]->getAddress()
         );
         $buyerJuridicAddresses = $doctrine
             ->getRepository(CompanyAddress::class)
@@ -75,7 +75,7 @@ class InvoiceGenerator
             $buyer->getName()
             . ' IBAN ' . $buyer->getIban()
             . ' ' . $buyer->getBankAffiliate()->getAffiliateNumber()
-            . ' ' . (\count($buyerJuridicAddresses) > 0 ? $buyerJuridicAddresses[0]->getAddress() : '')
+            . ' ' . (\count($buyerJuridicAddresses) > 0 ? ('a.j.' .$buyerJuridicAddresses[0]->getAddress()) : '')
         );
         $sheet->setCellValue(
             'O4',

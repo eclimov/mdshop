@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route(name="bankAffiliate.")
- * @IsGranted("ROLE_ADMIN")
  */
 class BankAffiliateController extends AbstractController {
     /**
@@ -55,6 +54,7 @@ class BankAffiliateController extends AbstractController {
      * @param BankAffiliate $bankAffiliate
      * @param EntityManagerInterface $em
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(BankAffiliate $bankAffiliate, EntityManagerInterface $em): Response
     {
