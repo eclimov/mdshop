@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Company;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -54,6 +55,12 @@ class CompanyType extends AbstractType
                 'class' => BankAffiliate::class,
                 'choice_label' => function(BankAffiliate $bankAffiliate) {
                     return '[' . $bankAffiliate->getBank()->getName() . ']' . $bankAffiliate->getAffiliateNumber();
+                },
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('ba')
+                        ->innerJoin('ba.bank', 'b')
+                        ->addOrderBy('b.name', 'ASC')
+                        ->addOrderBy('ba.affiliateNumber');
                 },
                 'constraints' => [
                     new NotBlank(),
