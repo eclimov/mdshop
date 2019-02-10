@@ -3,23 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\Company;
-use App\Entity\CompanyAddress;
+use App\Entity\Invoice;
 use App\Form\InvoiceType;
 use App\Service\InvoiceGenerator;
-use App\Service\XlsProcessor;
-use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Invoice;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * @Route(name="invoice.")
@@ -34,7 +27,7 @@ class InvoiceController extends AbstractController {
     {
         $invoices = $this->getDoctrine()
             ->getRepository(Invoice::class)
-            ->findAll();
+            ->findAllOrderDesc();
 
         return $this->render('invoice/list.html.twig', [
             'invoices' => $invoices,
