@@ -8,10 +8,9 @@ use App\Form\CompanyAddressType;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route(name="companyAddress.")
@@ -94,17 +93,5 @@ class CompanyAddressController extends AbstractController {
         return $this->render('companyAddress/edit.html.twig', [
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @param CompanyAddress $companyAddress
-     * @return FormInterface
-     */
-    public function createDeleteForm(CompanyAddress $companyAddress): FormInterface
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('companyAddress.delete', ['id' => $companyAddress->getId()]))
-            ->setMethod('DELETE')
-            ->getForm();
     }
 }

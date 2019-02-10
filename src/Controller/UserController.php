@@ -4,14 +4,12 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
-use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
@@ -151,17 +149,5 @@ class UserController extends AbstractController {
         return $this->redirect(
             $request->headers->get('referer')
         );
-    }
-
-    /**
-     * @param User $user
-     * @return FormInterface
-     */
-    public function createDeleteForm(User $user): FormInterface
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('user.delete', ['id' => $user->getId()]))
-            ->setMethod('DELETE')
-            ->getForm();
     }
 }

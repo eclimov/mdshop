@@ -8,11 +8,9 @@ use App\Form\CompanyEmployeeType;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route(name="companyEmployee.")
@@ -95,17 +93,5 @@ class CompanyEmployeeController extends AbstractController {
         return $this->render('companyEmployee/edit.html.twig', [
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @param CompanyEmployee $companyEmployee
-     * @return FormInterface
-     */
-    public function createDeleteForm(CompanyEmployee $companyEmployee): FormInterface
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('companyEmployee.delete', ['id' => $companyEmployee->getId()]))
-            ->setMethod('DELETE')
-            ->getForm();
     }
 }

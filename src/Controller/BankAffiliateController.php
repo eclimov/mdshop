@@ -8,11 +8,9 @@ use App\Form\BankAffiliateType;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route(name="bankAffiliate.")
@@ -95,17 +93,5 @@ class BankAffiliateController extends AbstractController {
         return $this->render('bankAffiliate/edit.html.twig', [
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @param BankAffiliate $bankAffiliate
-     * @return FormInterface
-     */
-    public function createDeleteForm(BankAffiliate $bankAffiliate): FormInterface
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('bankAffiliate.delete', ['id' => $bankAffiliate->getId()]))
-            ->setMethod('DELETE')
-            ->getForm();
     }
 }
