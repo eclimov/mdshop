@@ -4,10 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Company;
 use App\Entity\CompanyAddress;
-use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\AbstractQuery;
-use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class CompanyAddressRepository extends ServiceEntityRepository
@@ -21,7 +18,7 @@ class CompanyAddressRepository extends ServiceEntityRepository
      * @param Company $company
      * @return CompanyAddress[]
      */
-    public function findJuridicAddressesByCompany(Company $company): array
+    public function findJuridicByCompany(Company $company): array
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.company = :company')

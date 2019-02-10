@@ -5,17 +5,15 @@ namespace App\Controller;
 use App\Entity\Company;
 use App\Entity\User;
 use App\Form\CompanyType;
+use App\Repository\CompanyAddressRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 /**
  * @Route(name="company.")
@@ -42,15 +40,20 @@ class CompanyController extends AbstractController {
     /**
      * @Route("company/{id}", name="view", requirements={"id" = "\d+"}, methods={"GET"})
      * @param Company $company
+     * @param CompanyAddressRepository $companyAddressRepository
      * @return Response
      */
-    public function view(Company $company): Response
+    public function view(Company $company, CompanyAddressRepository $companyAddressRepository): Response
     {
         /** @var User $user */
         $user = $this->getUser();
 
         if ($user->getRole() !== 'ROLE_ADMIN' && $company->isHidden()) {
             throw new AccessDeniedHttpException();
+        }
+
+        if(!\count($companyAddressRepository->findJuridicByCompany($company))) {
+            $this->addFlash('warning', 'Company has no juridic address');
         }
 
         $deleteForm = $this->createDeleteForm($company);

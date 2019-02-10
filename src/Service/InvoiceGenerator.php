@@ -2,13 +2,8 @@
 
 namespace App\Service;
 
-use App\Entity\Company;
 use App\Entity\CompanyAddress;
 use App\Entity\Invoice;
-use App\Repository\CompanyAddressRepository;
-use App\Repository\CompanyRepository;
-use App\Service\XlsProcessor;
-use Doctrine\ORM\EntityManager;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
 
 class InvoiceGenerator
@@ -59,7 +54,7 @@ class InvoiceGenerator
 
         $sellerJuridicAddresses = $doctrine
             ->getRepository(CompanyAddress::class)
-            ->findJuridicAddressesByCompany($seller);
+            ->findJuridicByCompany($seller);
         $sheet->setCellValue(
             'C5',
             $seller->getName()
@@ -69,7 +64,7 @@ class InvoiceGenerator
         );
         $buyerJuridicAddresses = $doctrine
             ->getRepository(CompanyAddress::class)
-            ->findJuridicAddressesByCompany($buyer);
+            ->findJuridicByCompany($buyer);
         $sheet->setCellValue(
             'C6',
             $buyer->getName()
