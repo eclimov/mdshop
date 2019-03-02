@@ -130,7 +130,8 @@ class UserController extends AbstractController {
      * @param Request $request
      * @return Response
      */
-    public function setLocaleEn(Request $request) {
+    public function setLocaleEn(Request $request): Response
+    {
         $request->getSession()->set('_locale', 'en');
 
         return $this->redirect(
@@ -143,7 +144,8 @@ class UserController extends AbstractController {
      * @param Request $request
      * @return Response
      */
-    public function setLocaleRu(Request $request) {
+    public function setLocaleRu(Request $request): Response
+    {
         $request->getSession()->set('_locale', 'ru');
 
         return $this->redirect(
