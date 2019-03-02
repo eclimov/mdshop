@@ -1,4 +1,7 @@
-1. On VM:  
+1. PSPStorm plugins:  
+
+https://blog.martinhujer.cz/best-phpstorm-plugins-for-symfony-development/
+2. On VM:  
    1. Update apps  
    `sudo apt-get update`  
    2. Open port 22  
@@ -37,7 +40,7 @@
    `sudo chmod -R 777 uploads`
 
 
-2. On LM:  
+3. On LM:  
    1. Install pbcopy  
    `sudo apt-get install -y xclip`  
    `alias pbcopy="xclip -sel clip"`
