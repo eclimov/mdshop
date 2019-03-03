@@ -12,7 +12,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">Artprezent</a>
+        <a class="navbar-brand" href="{{ url('item.list') }}">Artprezent</a>
         {% if app.user %}
             <a href="{{ url('invoice.list') }}" class="btn btn-link">{% trans %}Invoices{% endtrans %}</a>
             <a href="{{ url('company.list') }}" class="btn btn-link">{% trans %}Companies{% endtrans %}</a>
