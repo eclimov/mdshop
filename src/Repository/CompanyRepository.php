@@ -5,7 +5,6 @@ namespace App\Repository;
 use App\Entity\Company;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\AbstractQuery;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class CompanyRepository extends ServiceEntityRepository
@@ -18,14 +17,14 @@ class CompanyRepository extends ServiceEntityRepository
     /**
      * @return Company[]
      */
-    public function findVisible(): array
+    public function findVisibleOrderByName(): array
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.hidden = :hidden')
             ->setParameters([
                 'hidden' => false,
             ])
-            ->orderBy('c.createdAt')
+            ->orderBy('c.name')
             ->getQuery()
             ->getResult();
     }
@@ -45,12 +44,16 @@ class CompanyRepository extends ServiceEntityRepository
      * @param User $user
      * @return Company[]
      */
-    public function findVisibleToUser(User $user): array
+    public function findVisibleToUserOrderByName(User $user): array
     {
         if ($user->getRole() !== 'ROLE_ADMIN') {
-            return $this->findVisible();
+            return $this->findVisibleOrderByName();
         }
 
-        return $this->findAll();
+        return $this->createQueryBuilder('c')
+            ->addOrderBy('c.name')
+            ->getQuery()
+            ->getResult()
+            ;
     }
 }

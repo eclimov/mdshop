@@ -28,7 +28,7 @@ class CompanyController extends AbstractController {
     {
         $companies = $this->getDoctrine()
             ->getRepository(Company::class)
-            ->findVisibleToUser(
+            ->findVisibleToUserOrderByName(
                 $this->getUser()
             );
 
