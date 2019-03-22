@@ -5,17 +5,11 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CompanyRepository")
  * @ORM\Table(name="companies")
  * @ORM\HasLifecycleCallbacks()
- * @UniqueEntity(
- *     fields={"fiscalCode"},
- *     errorPath="fiscalCode",
- *     message="This fiscal code already exists"
- * )
  */
 class Company{
     /**
