@@ -45,3 +45,4 @@ https://blog.martinhujer.cz/best-phpstorm-plugins-for-symfony-development/
    `sudo apt-get install -y xclip`  
    `alias pbcopy="xclip -sel clip"`
  
+НЕ ОСТАВЛЯТЬ ДЕФОЛТНЫЕ РЕКВИЗИТЫ К БАЗЕ, А ТО БУДЕТ КАК В ПРОШЛЫЙ РАЗ
