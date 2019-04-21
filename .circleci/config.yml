@@ -4,6 +4,8 @@ jobs:
     working_directory: /dockerapp
     docker:
       - image: docker:18.05.0-ce-git
+    environment:
+      - APP_SECRET: $APP_SECRET
     steps:
       - checkout
       - setup_remote_docker
