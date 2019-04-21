@@ -4,8 +4,6 @@ jobs:
     working_directory: /dockerapp
     docker:
       - image: docker:18.05.0-ce-git
-    environment:
-      - APP_SECRET: $APP_SECRET
     steps:
       - checkout
       - setup_remote_docker
@@ -28,6 +26,8 @@ jobs:
             docker push $DOCKER_HUB_USER_ID/mdshop:latest
       - deploy:
           name: Deploy application to Digital Ocean
+          environment:
+            APP_SECRET: $APP_SECRET
           #Use 'docker-compose logs -f -t' to attach yourself to the logs of all running services
           command: |
             ssh -o "StrictHostKeyChecking no" $DEPLOY_USER@$DEPLOY_HOST "cd /root/opt/mdshop && git reset --hard && git pull && docker-compose -f docker-compose.prod.yml pull php-fpm && docker-compose -f docker-compose.prod.yml up -d --build --force-recreate php-fpm && docker-compose exec -T php-fpm bin/console doctrine:migrations:migrate -n && docker container prune -f && docker image prune -f && docker network prune -f && docker volume prune -f"
