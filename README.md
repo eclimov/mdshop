@@ -20,29 +20,26 @@ https://blog.martinhujer.cz/best-phpstorm-plugins-for-symfony-development/
    `docker-compose --version`
    5. Install git  
    `sudo apt-get install git`    
-   6. Check out SSH instructions:  
-   https://medium.com/@lewdaly/circleci-docker-digital-ocean-409628f5a428  
-   7. Install npm  
-   `apt install npm`  
-   within project's directory: `npm install`  
-   8. Install composer  
-   `apt install composer`  
-   within project's directory: `composer install`  
-   9. Reboot  
+   6. Create SSH key for deploy:  
+   (more details here: https://medium.com/@lewdaly/circleci-docker-digital-ocean-409628f5a428)  
+   `cd /root/.ssh && ssh-keygen -t rsa` (without password) > `/root/.ssh/id_rsa_deploy` > `cat id_rsa_deploy.pub >> authorized_keys`  
+   7. Reboot  
    `sudo shutdown -r now`  
-   10. Check router:    
+   8. Check router:    
    `bin/console debug:router --env=prod`  
-   11. Add swap memory    
+   9. Add swap memory    
    `https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-16-04`  
-   12. Create 'uploads' directory and set the permissions from within container:    
+   10. Create 'uploads' directory and set the permissions from within container:    
    `chmod -R 777 public/uploads/`
-   13. Grant all permissions to 'uploads' directory on host:    
+   11. Grant all permissions to 'uploads' directory on host:    
    `sudo chmod -R 777 uploads`
 
 
 3. On LM:  
-   1. Install pbcopy  
+   1. `scp <user>@<droplet_ip>:~/.ssh/id_rsa_deploy ~/.ssh/ && ssh-add ~/.ssh/id_rsa_deploy`
+   2. Install pbcopy  
    `sudo apt-get install -y xclip`  
-   `alias pbcopy="xclip -sel clip"`
+   `alias pbcopy="xclip -sel clip"`  
+   3. `pbcopy < ~/.ssh/id_rsa_deploy`
  
 НЕ ОСТАВЛЯТЬ ДЕФОЛТНЫЕ РЕКВИЗИТЫ К БАЗЕ, А ТО БУДЕТ КАК В ПРОШЛЫЙ РАЗ
