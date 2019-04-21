@@ -28,4 +28,4 @@ jobs:
           name: Deploy application to Digital Ocean
           #Use 'docker-compose logs -f -t' to attach yourself to the logs of all running services
           command: |
-            ssh -o "StrictHostKeyChecking no" $DEPLOY_USER@$DEPLOY_HOST "cd /opt/mdshop && git reset --hard && git pull && docker-compose -f docker-compose.prod.yml pull php-fpm && docker-compose -f docker-compose.prod.yml up -d --build --force-recreate php-fpm && docker-compose exec -T php-fpm bin/console doctrine:migrations:migrate -n && docker container prune -f && docker image prune -f && docker network prune -f && docker volume prune -f"
+            ssh -o "StrictHostKeyChecking no" $DEPLOY_USER@$DEPLOY_HOST "cd /root/opt/mdshop && git reset --hard && git pull && docker-compose -f docker-compose.prod.yml pull php-fpm && docker-compose -f docker-compose.prod.yml up -d --build --force-recreate php-fpm && docker-compose exec -T php-fpm bin/console doctrine:migrations:migrate -n && docker container prune -f && docker image prune -f && docker network prune -f && docker volume prune -f"
