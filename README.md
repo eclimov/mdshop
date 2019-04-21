@@ -25,13 +25,15 @@ https://blog.martinhujer.cz/best-phpstorm-plugins-for-symfony-development/
    `cd /root/.ssh && ssh-keygen -t rsa` (without password) > `/root/.ssh/id_rsa_deploy` > `cat id_rsa_deploy.pub >> authorized_keys`  
    7. Reboot  
    `sudo shutdown -r now`  
-   8. Check router:    
+   8. Run containers and execute migrations:  
+   `docker-compose exec php-fpm bash` > `bin/console d:m:mi`
+   9. Check router:    
    `bin/console debug:router --env=prod`  
-   9. Add swap memory    
+   10. Add swap memory    
    `https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-16-04`  
-   10. Create 'uploads' directory and set the permissions from within container:    
+   11. Create 'uploads' directory and set the permissions from within container:    
    `chmod -R 777 public/uploads/`
-   11. Grant all permissions to 'uploads' directory on host:    
+   12. Grant all permissions to 'uploads' directory on host:    
    `sudo chmod -R 777 uploads`
 
 
