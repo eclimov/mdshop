@@ -15,7 +15,7 @@ RUN apt-get update \
 ENV APP_ENV=prod
 ENV MAILER_URL=dummy
 ENV MAILER_SENDER=dummy
-ENV MAILER_SENDER=dummy
+ENV MAILER_RECIPIENT=dummy
 
 RUN composer install --no-dev --optimize-autoloader \
     && bin/console cache:warmup \
