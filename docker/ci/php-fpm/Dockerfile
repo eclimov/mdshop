@@ -12,15 +12,9 @@ RUN apt-get update \
     && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 # Using 'dummy' values to avoid errors in cases, when required env variables aren't provided
-
-RUN APP_ENV=prod MAILER_URL=dummy MAILER_SENDER=dummy MAILER_RECIPIENT=dummy composer install --no-dev --optimize-autoloader
-
-# Waming-up cache
-RUN APP_ENV=prod MAILER_URL=dummy MAILER_SENDER=dummy MAILER_RECIPIENT=dummy bin/console cache:warmup
-
-# Providing write permissions
-RUN APP_ENV=prod MAILER_URL=dummy MAILER_SENDER=dummy MAILER_RECIPIENT=dummy chmod -R 777 var/
+RUN APP_ENV=prod MAILER_URL=dummy MAILER_SENDER=dummy MAILER_RECIPIENT=dummy composer install --no-dev --optimize-autoloader \
+    && bin/console cache:warmup \
+    && chmod -R 777 var/ \
+    && chmod -R 777 public/uploads/
+# Waming-up cache + Providing write permissions
 # https://github.com/denderello/symfony-docker-example/issues/2
-
-RUN APP_ENV=prod MAILER_URL=dummy MAILER_SENDER=dummy MAILER_RECIPIENT=dummy chmod -R 777 public/uploads/
-
