@@ -2,8 +2,8 @@
 
 {% block title %}{% trans %}Invoices{% endtrans %}{% endblock %}
 
-{% block body %}
-    <div class="container mt-3 mb-4">
+{% block content %}
+    <div>
         <table class="table table-hover table-sm">
             <tr class="thead-dark">
                 <th>Id</th>
@@ -21,23 +21,21 @@
                     </td>
                     <td>{{ invoice.createdAt|date("d/m/Y h:s") }}</td>
                     <td style="text-align: center;">
-                        <div>
-                            <a href="{{ url('invoice.download', {id: invoice.id}) }}" style="margin: 5px; text-decoration: none;">
-                                <button type="button" class="btn btn-primary" title="{% trans %}Download{% endtrans %}">
-                                    <span class="octicon octicon-file"></span>
-                                </button>
-                            </a>
-                            <a href="{{ url('invoice.edit', {id: invoice.id}) }}" style="margin: 5px; text-decoration: none;">
-                                <button type="button" class="btn btn-secondary" title="{% trans %}Edit{% endtrans %}">
-                                    <span class="octicon octicon-pencil"></span>
-                                </button>
-                            </a>
-                            <form action="{{ url('invoice.delete', {id: invoice.id}) }}" method="post" style="margin: 5px; display: inline;">
-                                <button type="submit" class="btn btn-danger" title="{% trans %}Delete{% endtrans %}" onclick="return confirm('{% trans %}Are you sure you want to delete this object?{% endtrans %}');">
-                                    <span class="octicon octicon-trashcan"></span>
-                                </button>
-                            </form>
-                        </div>
+                        <a href="{{ url('invoice.download', {id: invoice.id}) }}" style="margin: 5px; text-decoration: none;">
+                            <button type="button" class="btn btn-primary" title="{% trans %}Download{% endtrans %}">
+                                <span class="octicon octicon-file"></span>
+                            </button>
+                        </a>
+                        <a href="{{ url('invoice.edit', {id: invoice.id}) }}" style="margin: 5px; text-decoration: none;">
+                            <button type="button" class="btn btn-secondary" title="{% trans %}Edit{% endtrans %}">
+                                <span class="octicon octicon-pencil"></span>
+                            </button>
+                        </a>
+                        <form action="{{ url('invoice.delete', {id: invoice.id}) }}" method="post" style="margin: 5px; display: inline;">
+                            <button type="submit" class="btn btn-danger" title="{% trans %}Delete{% endtrans %}" onclick="return confirm('{% trans %}Are you sure you want to delete this object?{% endtrans %}');">
+                                <span class="octicon octicon-trashcan"></span>
+                            </button>
+                        </form>
                     </td>
                 </tr>
             {% endfor %}

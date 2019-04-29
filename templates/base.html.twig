@@ -10,63 +10,200 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/4.4.0/font/octicons.min.css">
     {% block stylesheets %}{% endblock %}
 </head>
-{#test#}
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ url('item.list') }}">Artprezent</a>
-        {% if app.user %}
-            <a href="{{ url('invoice.list') }}" class="btn btn-link">{% trans %}Invoices{% endtrans %}</a>
-            <a href="{{ url('company.list') }}" class="btn btn-link">{% trans %}Companies{% endtrans %}</a>
-            <a href="{{ url('bank.list') }}" class="btn btn-link">{% trans %}Banks{% endtrans %}</a>
+<style>
+    .ctnr {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: 50px auto 50px;
+    }
 
-            {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ url('user.list') }}" class="btn btn-link">{% trans %}Users{% endtrans %}</a>
+    header {
+        grid-column: 2 / -1;
+        background-color: #343a40;
+        display: flex;
+    }
+
+    header > div:not(:last-child) {
+        margin-right: 15px;
+    }
+
+    header > div:last-child {
+        margin-left: auto;
+
+
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-template-rows: 50% 50%;
+    }
+
+    .header-locale {
+        grid-column: 1 / 2;
+        grid-row: 1 / -1;
+
+        font-size: 10px;
+    }
+
+    .header-user-info {
+        grid-column: 2 / 3;
+        grid-row: 1 / -1;
+        text-align: right;
+    }
+
+    .header-user-login {
+        grid-column: 3 / -1;
+        grid-row: 1 / 4;
+    }
+
+    .header-user-login span {
+        font-size: 30px !important;
+    }
+
+    header a {
+        text-decoration: none !important;
+        font-weight: bold !important;
+    }
+
+    .logo {
+        grid-row: 1 / 2;
+        background-color: #343a40;
+
+        font-weight: bold;
+        font-size: 19px;
+        font-style: italic;
+
+        cursor: pointer;
+    }
+
+    .content {
+        grid-column: 1 / -1;
+        display: grid;
+        padding: 20px;
+        grid-gap: 5px;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: auto auto;
+    }
+
+    .content > div {
+        grid-column: 1 / -1;
+    }
+
+    footer {
+        grid-column: 1 / -1;
+        background-color: #343a40;
+    }
+
+    .text-centered {
+        display:flex;
+        align-items: center; /* Vertical center alignment */
+        justify-content: center; /* Horizontal center alignment */
+    }
+
+    .table td {
+        vertical-align: middle;
+    }
+</style>
+<body>
+    <div class="ctnr">
+        <header>
+            {% if app.user %}
+                <div class="text-centered">
+                    <a href="{{ url('invoice.list') }}" class="btn btn-link">{% trans %}Invoices{% endtrans %}</a>
+                </div>
+
+                <div class="text-centered">
+                    <a href="{{ url('company.list') }}" class="btn btn-link">{% trans %}Companies{% endtrans %}</a>
+                </div>
+
+                <div class="text-centered">
+                    <a href="{{ url('bank.list') }}" class="btn btn-link">{% trans %}Banks{% endtrans %}</a>
+                </div>
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div class="text-centered">
+                        <a href="{{ url('user.list') }}" class="btn btn-link">{% trans %}Users{% endtrans %}</a>
+                    </div>
+                {% endif %}
             {% endif %}
 
-            <div class="ml-auto">
-                {% if app.request.getLocale() == 'en' %}
-                    <a href="{{ path('user.set_locale_ru') }}">RU</a>
-                {% else %}
-                    <a href="{{ path('user.set_locale_en') }}">EN</a>
-                {% endif %}
-                <span class="text-white">{{ app.user.username }}</span>
+            <div>
+                <div class="header-locale text-centered mr-3">
+                    {% if app.user %}
+                        {% if app.request.getLocale() == 'en' %}
+                            <a href="{{ path('user.set_locale_ru') }}">RU</a>
+                        {% else %}
+                            <a href="{{ path('user.set_locale_en') }}">EN</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
 
-                <a href="{{ path('logout') }}" class="btn btn-light">{% trans %}Logout{% endtrans %}</a>
-            </div>
-        {% else %}
-            {# not logged #}
-            <a href="{{ path('login') }}" class="btn btn-light ml-auto">{% trans %}Login{% endtrans %}</a>
-        {% endif %}
-    </nav>
+                <div class="header-user-info">
+                    {% if app.user %}
+                        <div class="text-white">
+                            {{ app.user.username }}
+                        </div>
 
-    <div class="container mt-3 mb-4">
-        {% for message in app.flashes('notice') %}
-            <div class="alert alert-success" role="alert">
-                {{ message|trans }}
-            </div>
-        {% endfor %}
-        {% for message in app.flashes('error') %}
-            <div class="alert alert-danger" role="alert">
-                {{ message|trans }}
-            </div>
-        {% endfor %}
-        {% for message in app.flashes('warning') %}
-            <div class="alert alert-warning" role="alert">
-                {{ message|trans }}
-            </div>
-        {% endfor %}
+                        <div>
+                            <a href="{{ url('company.view', {id: app.user.company.id}) }}">
+                                {{ app.user.company.name }}
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
 
-        {% block body %}{% endblock %}
+                <div class="header-user-login text-centered ml-3 mr-3">
+                    {% if app.user %}
+                        <a href="{{ path('logout') }}">
+                            <span class="octicon octicon-sign-out" title="{% trans %}Logout{% endtrans %}"></span>
+                        </a>
+                    {% else %}
+                        {# not logged #}
+                        <a href="{{ path('login') }}">
+                            <span class="octicon octicon-sign-in" title="{% trans %}Login{% endtrans %}"></span>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </header>
+
+        <div class="logo text-centered text-white" data-href="{{ url('item.list') }}">
+            Artprezent
+        </div>
+
+        <div class="content">
+            {% for message in app.flashes('notice') %}
+                <div class="alert alert-success" role="alert">
+                    {{ message|trans }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message|trans }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('warning') %}
+                <div class="alert alert-warning" role="alert">
+                    {{ message|trans }}
+                </div>
+            {% endfor %}
+
+            {% block content %}{% endblock %}
+        </div>
+
+        <footer class="text-centered">
+            <span class="text-white">
+                © {{ "now"|date("Y") }}&nbsp;
+            </span>
+            <a href="mailto:klimovedik88@gmail.com"> Eduard Climov</a>
+        </footer>
     </div>
 
     {% block javascripts %}{% endblock %}
+    <script>
+        $(".logo").click(function() {
+            window.location = $(this).data('href');
+            return false;
+        });
+    </script>
 </body>
 
-<!-- Footer -->
-<footer class="page-footer font-small blue">
-    <div class="footer-copyright text-center py-1">© {{ "now"|date("Y") }}
-        <a href="mailto:klimovedik88@gmail.com"> Eduard Climov</a>
-    </div>
-</footer>
-<!-- Footer -->
 </html>

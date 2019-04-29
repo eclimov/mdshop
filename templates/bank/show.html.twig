@@ -2,7 +2,7 @@
 
 {% block title %}{{ bank.name }}{% endblock %}
 
-{% block body %}
+{% block content %}
     {% include 'toolbar.html.twig' with {
         'deleteForm': deleteForm,
         'urlEdit': url('bank.edit', {id: bank.id})

@@ -2,21 +2,25 @@
 
 {% block title %}{{ company.name }}{% endblock %}
 
-{% block body %}
+{% block content %}
     {% include 'toolbar.html.twig' with {
         'deleteForm': deleteForm,
         'urlEdit': url('company.edit', {id: company.id})
     } %}
-    <h1 class="display-4">{{ company.name }}</h1>
-    <p>{% trans %}Affiliate number{% endtrans %}: {{ company.bankAffiliate.affiliateNumber }}</p>
-    <p>{% trans %}Fiscal code{% endtrans %}: {{ company.fiscalCode }}</p>
-    <p>IBAN: {{ company.iban }}</p>
-    <p>{% trans %}VAT{% endtrans %}: {{ company.vat }}</p>
-    <p>{% trans %}Created At{% endtrans %}: {{ company.createdAt|date("d/m/Y") }}</p>
-    <p>
-        <a href="{{ url('invoice.create', {id: company.id}) }}" class="btn btn-dark ml-auto">{% trans %}Create Invoice{% endtrans %}</a>
-    </p>
-    <hr>
+    <div>
+        <h1 class="display-4">{{ company.name }}</h1>
+    </div>
+    <div>
+        <p>{% trans %}Affiliate number{% endtrans %}: {{ company.bankAffiliate.affiliateNumber }}</p>
+        <p>{% trans %}Fiscal code{% endtrans %}: {{ company.fiscalCode }}</p>
+        <p>IBAN: {{ company.iban }}</p>
+        <p>{% trans %}VAT{% endtrans %}: {{ company.vat }}</p>
+        <p>{% trans %}Created At{% endtrans %}: {{ company.createdAt|date("d/m/Y") }}</p>
+        <p>
+            <a href="{{ url('invoice.create', {id: company.id}) }}" class="btn btn-dark ml-auto">{% trans %}Create Invoice{% endtrans %}</a>
+        </p>
+    </div>
+
     {% include 'companyAddress/list.html.twig' with {
         'company': company,
     } %}
