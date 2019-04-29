@@ -12,7 +12,12 @@ RUN apt-get update \
     && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 # Using 'dummy' values to avoid errors in cases, when required env variables aren't provided
-RUN APP_ENV=prod MAILER_URL=dummy MAILER_SENDER=dummy MAILER_RECIPIENT=dummy composer install --no-dev --optimize-autoloader \
+ENV APP_ENV=prod
+ENV MAILER_URL=dummy
+ENV MAILER_SENDER=dummy
+ENV MAILER_SENDER=dummy
+
+RUN composer install --no-dev --optimize-autoloader \
     && bin/console cache:warmup \
     && chmod -R 777 var/ \
     && chmod -R 777 public/uploads/
