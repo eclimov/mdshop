@@ -5,13 +5,16 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CompanyRepository")
  * @ORM\Table(name="companies")
+ * @UniqueEntity(fields="name", message="This company already exists")
+ * @UniqueEntity(fields="shortName", message="This company already exists")
  * @ORM\HasLifecycleCallbacks()
  */
-class Company{
+class Company {
     /**
      * @var int
      * @ORM\Id

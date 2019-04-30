@@ -26,11 +26,12 @@ class BankAffiliateController extends AbstractController {
     public function create(Request $request, EntityManagerInterface $em, Bank $bank): Response
     {
         $bankAffiliate = new BankAffiliate();
+        $bankAffiliate->setBank($bank);
+
         $form = $this->createForm(BankAffiliateType::class, $bankAffiliate);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $bankAffiliate->setBank($bank);
             $em->persist($bankAffiliate);
             $em->flush();
 

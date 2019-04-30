@@ -13,9 +13,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(name="bank_affiliates")
  * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity(
- *     fields={"affiliateNumber"},
+ *     fields={"affiliateNumber", "bank"},
  *     errorPath="affiliateNumber",
- *     message="This affiliate number already exists in DB"
+ *     message="This affiliate number already exists in this bank"
  * )
  */
 class BankAffiliate
