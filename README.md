@@ -1,5 +1,4 @@
 1. PSPStorm plugins:  
-
 https://blog.martinhujer.cz/best-phpstorm-plugins-for-symfony-development/
 2. On VM:  
    1. Update apps  
@@ -34,7 +33,12 @@ https://blog.martinhujer.cz/best-phpstorm-plugins-for-symfony-development/
    11. Create 'uploads' directory and set the permissions from within container:    
    `chmod -R 777 public/uploads/`
    12. Grant all permissions to 'uploads' directory on host:    
-   `sudo chmod -R 777 uploads`
+   `sudo chmod -R 777 uploads`  
+   13. Configure database backup:  
+   Edit crontab  
+   `crontab -e`  
+   Prepare crontab job to run every week  
+   `@weekly cd /root/opt/mdshop/ && docker-compose exec mysql bash -c "mysqldump --no-create-info -u root -p'$(grep -oP '^MYSQL_ROOT_PASSWORD=\K.*' .env)' $(grep -oP '^MYSQL_DATABASE=\K.*' .env) > './public/uploads/mysqlbackups/$(date +%d-%m-%Y).sql'"`
 
 
 3. On LM:  
