@@ -3,8 +3,8 @@
 namespace App\Service;
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Exception;
 use Roromix\Bundle\SpreadsheetBundle\Factory;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Symfony\Component\Filesystem\Filesystem;
 
 class XlsProcessor
@@ -24,7 +24,10 @@ class XlsProcessor
         return $this->factory->createSpreadsheet($path);
     }
 
-    public function createSpreadSheet()
+    /**
+     * @return Spreadsheet
+     */
+    public function createSpreadSheet(): Spreadsheet
     {
         return $this->factory->createSpreadsheet();
     }
@@ -33,9 +36,9 @@ class XlsProcessor
      * @param Spreadsheet $spreadsheet
      * @param String $path
      * @param String $fileName
-     * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+     * @throws Exception
      */
-    public function save(Spreadsheet $spreadsheet, String $path, String $fileName)
+    public function save(Spreadsheet $spreadsheet, String $path, String $fileName): void
     {
         $fileSystem = new Filesystem();
         if (!$fileSystem->exists($path )) {

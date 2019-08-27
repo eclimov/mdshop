@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
+use LogicException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +20,7 @@ class UserController extends AbstractController {
     /**
      * @Route("/user", name="list", methods={"GET"})
      * @return Response
-     * @throws \LogicException
+     * @throws LogicException
      */
     public function list(): Response
     {

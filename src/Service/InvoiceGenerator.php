@@ -4,7 +4,9 @@ namespace App\Service;
 
 use App\Entity\CompanyAddress;
 use App\Entity\Invoice;
+use PhpOffice\PhpSpreadsheet\Writer\Exception;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
+use function count;
 
 class InvoiceGenerator
 {
@@ -28,7 +30,14 @@ class InvoiceGenerator
         $this->xlsProcessor = $xlsProcessor;
     }
 
-    public function generate(Invoice $invoice, ManagerRegistry $doctrine)
+    /**
+     * @param Invoice $invoice
+     * @param ManagerRegistry $doctrine
+     * @return string
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @throws Exception
+     */
+    public function generate(Invoice $invoice, ManagerRegistry $doctrine): string
     {
         $spreadsheet = $this->getXlsProcessor()
             ->getSpreadSheet($this->getInvoiceDirectory() . '/' . 'template.xlsx');
@@ -70,7 +79,7 @@ class InvoiceGenerator
             $buyer->getName()
             . ' IBAN ' . $buyer->getIban()
             . ' ' . $buyer->getBankAffiliate()->getAffiliateNumber()
-            . ' ' . (\count($buyerJuridicAddresses) > 0 ? ('a.j.' .$buyerJuridicAddresses[0]->getAddress()) : '')
+            . ' ' . (count($buyerJuridicAddresses) > 0 ? ('a.j.' .$buyerJuridicAddresses[0]->getAddress()) : '')
         );
         $sheet->setCellValue(
             'O4',
@@ -118,12 +127,18 @@ class InvoiceGenerator
         return $this->getInvoiceDirectory() . '/' . $fileName;
     }
 
-    public function getInvoiceDirectory()
+    /**
+     * @return string
+     */
+    public function getInvoiceDirectory(): string
     {
         return $this->targetDirectory;
     }
 
-    public function getXlsProcessor()
+    /**
+     * @return XlsProcessor
+     */
+    public function getXlsProcessor(): XlsProcessor
     {
         return $this->xlsProcessor;
     }

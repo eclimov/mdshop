@@ -7,17 +7,17 @@ use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use function count;
 
 class UserType extends AbstractType
 {
@@ -68,11 +68,11 @@ class UserType extends AbstractType
                     'constraints' => $constraints,
                 ));
             })
-            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($passwordEncoder) {
+            ->addEventListener(FormEvents::PRE_SUBMIT, static function (FormEvent $event) use ($passwordEncoder) {
                 $eventData = $event->getData();
                 if($eventData && empty($eventData['password']['first'])) {  // If updating existing user, password is not required
                     unset($eventData['password']);
-                } else if(\count(array_unique(array_values($eventData['password']))) === 1) {  // Check if 'password' and 'repeat password' are equal
+                } else if(count(array_unique(array_values($eventData['password']))) === 1) {  // Check if 'password' and 'repeat password' are equal
                     /** @var User $user */
                     $user = $event->getForm()->getData();
                     $password = $eventData['password']['first'];
@@ -84,7 +84,7 @@ class UserType extends AbstractType
             })
             ->add('role', ChoiceType::class, [
                 'choices' => User::ROLES,
-                'choice_label' => function ($choiceValue, $key, $value) {
+                'choice_label' => static function ($choiceValue, $key, $value) {
                     return strtoupper($value);
                 },
                 'constraints' => [

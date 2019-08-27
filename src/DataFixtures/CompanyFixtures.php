@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\BankAffiliate;
 use App\Entity\Company;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;

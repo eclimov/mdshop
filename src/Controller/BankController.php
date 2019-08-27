@@ -5,13 +5,13 @@ namespace App\Controller;
 use App\Entity\Bank;
 use App\Form\BankType;
 use Doctrine\ORM\EntityManagerInterface;
+use LogicException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route(name="bank.")
@@ -20,7 +20,7 @@ class BankController extends AbstractController {
     /**
      * @Route("/bank", name="list", methods={"GET"})
      * @return Response
-     * @throws \LogicException
+     * @throws LogicException
      */
     public function list(): Response
     {

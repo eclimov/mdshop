@@ -2,12 +2,14 @@
 
 namespace App\EventListener;
 use Anyx\LoginGateBundle\Event\BruteForceAttemptEvent;
+use Swift_Mailer;
+use Swift_Message;
 use Twig\Environment;
 
 class BruteForceAttemptListener
 {
     /**
-     * @var \Swift_Mailer
+     * @var Swift_Mailer
      */
     private $mailer;
 
@@ -26,7 +28,7 @@ class BruteForceAttemptListener
      */
     private $twig;
 
-    public function __construct(\Swift_Mailer $mailer, string $mailfrom, string $mailto, Environment $twig
+    public function __construct(Swift_Mailer $mailer, string $mailfrom, string $mailto, Environment $twig
     )
     {
         $this->mailer = $mailer;
@@ -38,7 +40,7 @@ class BruteForceAttemptListener
     public function onBruteForceAttempt(BruteForceAttemptEvent $event)
     {
         $req = $event->getRequest();
-        $message = (new \Swift_Message())
+        $message = (new Swift_Message())
             ->setSubject('Brute-force attack')
             ->setFrom([$this->mailfrom])
             ->setTo([$this->mailto])

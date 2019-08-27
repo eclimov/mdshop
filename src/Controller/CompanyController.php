@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\CompanyType;
 use App\Repository\CompanyAddressRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use LogicException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
@@ -14,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use function count;
 
 /**
  * @Route(name="company.")
@@ -22,7 +24,7 @@ class CompanyController extends AbstractController {
     /**
      * @Route("/company", name="list", methods={"GET"})
      * @return Response
-     * @throws \LogicException
+     * @throws LogicException
      */
     public function list(): Response
     {
@@ -52,7 +54,7 @@ class CompanyController extends AbstractController {
             throw new AccessDeniedHttpException();
         }
 
-        if(!\count($companyAddressRepository->findJuridicByCompany($company))) {
+        if(!count($companyAddressRepository->findJuridicByCompany($company))) {
             $this->addFlash('warning', 'Company has no juridic address');
         }
 

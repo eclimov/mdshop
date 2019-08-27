@@ -346,6 +346,6 @@ class Company {
      */
     public function prePersist(): void
     {
-        $this->createdAt = new \DateTime();
+        $this->createdAt = new DateTime();
     }
 }

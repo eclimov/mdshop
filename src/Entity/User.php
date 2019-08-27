@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
 use DateTime;
+use Doctrine\ORM\Mapping as ORM;
+use Serializable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use function in_array;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Table(name="users")
  * @ORM\HasLifecycleCallbacks()
  */
-class User implements UserInterface, \Serializable
+class User implements UserInterface, Serializable
 {
     public const ROLES = [
         'ROLE_USER',
@@ -119,7 +119,7 @@ class User implements UserInterface, \Serializable
 
     public function setRole(string $role)
     {
-        if(\in_array($role, self::ROLES, true)) {
+        if(in_array($role, self::ROLES, true)) {
             $this->role = $role;
         }
 
@@ -216,6 +216,6 @@ class User implements UserInterface, \Serializable
      */
     public function prePersist(): void
     {
-        $this->createdAt = new \DateTime();
+        $this->createdAt = new DateTime();
     }
 }
