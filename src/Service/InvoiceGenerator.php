@@ -105,7 +105,7 @@ class InvoiceGenerator
         $unloadingPoint = $invoice->getUnloadingPoint();
         $sheet->setCellValue(
             'G9',
-            ($unloadingPoint !== null) ? ('mun.Chisinau ' . $unloadingPoint->getAddress()) : ''
+            ($unloadingPoint !== null) ? $unloadingPoint->getAddress() : ''
         );
         $approvedByEmployee = $invoice->getApprovedByEmployee();
         $sheet->setCellValue(

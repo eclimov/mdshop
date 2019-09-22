@@ -23,9 +23,9 @@ class CompanyFixtures extends Fixture implements DependentFixtureInterface
             $company->setName($companyName);
             $company->setShortName(substr($companyName, 0, 25));
             $company->setBankAffiliate($this->getReference('bankAffiliate_' . $faker->numberBetween(0,9)));
-            $company->setFiscalCode($faker->randomAscii);
+            $company->setFiscalCode($faker->randomElement(['12345', '54321', 'qwerty121']));
             $company->setIban($faker->iban(373));
-            $company->setVat($faker->randomAscii);
+            $company->setVat($faker->randomNumber());
             $company->setHidden($faker->boolean);
 
             $manager->persist($company);

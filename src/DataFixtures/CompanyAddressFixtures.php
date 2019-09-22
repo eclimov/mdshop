@@ -17,13 +17,15 @@ class CompanyAddressFixtures extends Fixture implements DependentFixtureInterfac
     {
         $faker = Faker\Factory::create('en_US');
         for ($i = 0; $i < 20; $i++) {
-            $companyAddress = new CompanyAddress();
-            $companyAddress->setAddress($faker->address);
-            $companyAddress->setJuridic($faker->boolean);
-            $companyAddress->setCompany($this->getReference('company_' . $i));
+            for ($j = 0; $j < 2; $j++) {
+                $companyAddress = new CompanyAddress();
+                $companyAddress->setAddress($faker->address);
+                $companyAddress->setJuridic($j % 2 === 0);
+                $companyAddress->setCompany($this->getReference('company_' . $i));
 
-            $manager->persist($companyAddress);
-            $this->addReference('companyAddress_' . $i, $companyAddress);
+                $manager->persist($companyAddress);
+                $this->addReference('companyAddress_' . $i . $j, $companyAddress);
+            }
         }
 
         $manager->flush();
