@@ -6,7 +6,7 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\CompanyEmployeeRepository")
  * @ORM\Table(name="company_employees")
  * @ORM\HasLifecycleCallbacks()
  */

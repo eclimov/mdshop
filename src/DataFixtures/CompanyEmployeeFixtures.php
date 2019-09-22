@@ -17,13 +17,19 @@ class CompanyEmployeeFixtures extends Fixture implements DependentFixtureInterfa
     {
         $faker = Faker\Factory::create('en_US');
         for ($i = 0; $i < 20; $i++) {
-            $companyEmployee = new CompanyEmployee();
-            $companyEmployee->setName($faker->name);
-            $companyEmployee->setPosition($faker->randomElement(['Director',null]));
-            $companyEmployee->setCompany($this->getReference('company_' . $i));
+            $companyDirector = new CompanyEmployee();
+            $companyDirector->setName($faker->name);
+            $companyDirector->setPosition('Director');
+            $companyDirector->setCompany($this->getReference('company_' . $i));
+            $manager->persist($companyDirector);
+            $this->addReference('companyEmployee_' . $i . '1', $companyDirector);
 
-            $manager->persist($companyEmployee);
-            $this->addReference('companyEmployee_' . $i, $companyEmployee);
+            $companyConsultant = new CompanyEmployee();
+            $companyConsultant->setName($faker->name);
+            $companyConsultant->setPosition('Consultant');
+            $companyConsultant->setCompany($this->getReference('company_' . $i));
+            $manager->persist($companyConsultant);
+            $this->addReference('companyEmployee_' . $i . '2', $companyConsultant);
         }
 
         $manager->flush();

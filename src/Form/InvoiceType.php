@@ -6,6 +6,7 @@ use App\Entity\Company;
 use App\Entity\CompanyAddress;
 use App\Entity\CompanyEmployee;
 use App\Entity\Invoice;
+use App\Repository\CompanyEmployeeRepository;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -83,24 +84,20 @@ class InvoiceType extends AbstractType
             ])
             ->add('approvedByEmployee', EntityType::class, [
                 'class' => CompanyEmployee::class,
-                'choice_label' => 'name',
-                'query_builder' => function (EntityRepository $er) use ($companyInitiator) {
-                    return $er->createQueryBuilder('a')
-                        ->where('a.company = :company')
-                        ->setParameters([
-                            'company' => $companyInitiator,
-                        ]);
+                'choice_label' => function (CompanyEmployee $companyEmployee) {
+                    return '[' . $companyEmployee->getPosition() . '] ' . $companyEmployee->getName();
+                },
+                'query_builder' => function (CompanyEmployeeRepository $companyEmployeeRepository) use ($companyInitiator) {
+                    return $companyEmployeeRepository->getCompanyEmployeesOrderDirectorLastQb($companyInitiator);
                 },
             ])
             ->add('processedByEmployee', EntityType::class, [
                 'class' => CompanyEmployee::class,
-                'choice_label' => 'name',
-                'query_builder' => function (EntityRepository $er) use ($companyInitiator) {
-                    return $er->createQueryBuilder('a')
-                        ->where('a.company = :company')
-                        ->setParameters([
-                            'company' => $companyInitiator,
-                        ]);
+                'choice_label' => function (CompanyEmployee $companyEmployee) {
+                    return '[' . $companyEmployee->getPosition() . '] ' . $companyEmployee->getName();
+                },
+                'query_builder' => function (CompanyEmployeeRepository $companyEmployeeRepository) use ($companyInitiator) {
+                    return $companyEmployeeRepository->getCompanyEmployeesOrderDirectorLastQb($companyInitiator);
                 },
             ]);
     }
