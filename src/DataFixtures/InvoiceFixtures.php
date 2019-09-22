@@ -29,6 +29,7 @@ class InvoiceFixtures extends Fixture implements DependentFixtureInterface
             $invoice->setUnloadingPoint($faker->randomElement($invoice->getBuyer()->getAddresses()->toArray()));
             $invoice->setApprovedByEmployee($faker->randomElement($invoice->getSeller()->getEmployees()->toArray()));
             $invoice->setProcessedByEmployee($faker->randomElement($invoice->getSeller()->getEmployees()->toArray()));
+            $invoice->setRecipientName($faker->name);
 
             $manager->persist($invoice);
             $this->addReference('invoice_' . $i, $invoice);

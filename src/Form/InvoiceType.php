@@ -99,7 +99,19 @@ class InvoiceType extends AbstractType
                 'query_builder' => function (CompanyEmployeeRepository $companyEmployeeRepository) use ($companyInitiator) {
                     return $companyEmployeeRepository->getCompanyEmployeesOrderDirectorLastQb($companyInitiator);
                 },
-            ]);
+            ])
+            ->add('recipientName', TextType::class, [
+                'constraints' => [
+                    new NotBlank(),
+                    new Length(['min'=>'1', 'max' => 255,]),
+                ],
+                'attr' => [
+                    'placeholder' => '-',
+                    'autocomplete' => 'off',
+                ],
+                'empty_data' => '-',
+            ])
+        ;
     }
 
     /**

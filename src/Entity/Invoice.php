@@ -95,6 +95,12 @@ class Invoice
     private $processedByEmployee;
 
     /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     */
+    private $recipientName;
+
+    /**
      * @return CompanyEmployee|null
      */
     public function getApprovedByEmployee(): ?CompanyEmployee
@@ -284,6 +290,24 @@ class Invoice
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getRecipientName(): ?string
+    {
+        return $this->recipientName;
+    }
+
+    /**
+     * @param string $recipientName
+     * @return Invoice
+     */
+    public function setRecipientName(string $recipientName): Invoice
+    {
+        $this->recipientName = $recipientName;
+
+        return $this;
+    }
 
     /**
      * @return int

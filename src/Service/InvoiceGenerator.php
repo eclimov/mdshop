@@ -117,6 +117,8 @@ class InvoiceGenerator
             'C27',
             trim($processedByEmployee->getPosition() . ' ' . $processedByEmployee->getName())
         );
+        $sheet->setCellValue('K28', $invoice->getRecipientName());
+
         $fileName = $invoice->getId() . '.xlsx';
         $this->getXlsProcessor()->save(
             $spreadsheet,

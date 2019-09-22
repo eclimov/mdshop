@@ -13,8 +13,9 @@
     </div>
 
     <div>
-        <p>{% trans %}Seller{% endtrans %}: <a href="{{ url('company.view', {id: invoice.seller.id}) }}">{{ invoice.seller.name }}</a></p>
-        <p>{% trans %}Buyer{% endtrans %}: <a href="{{ url('company.view', {id: invoice.buyer.id}) }}">{{ invoice.buyer.name }}</a></p>
+        <p><b>{% trans %}Seller{% endtrans %}:</b> <a href="{{ url('company.view', {id: invoice.seller.id}) }}">{{ invoice.seller.name }}</a></p>
+        <p><b>{% trans %}Buyer{% endtrans %}:</b> <a href="{{ url('company.view', {id: invoice.buyer.id}) }}">{{ invoice.buyer.name }}</a></p>
+        <p><b>{% trans %}Approved by employee{% endtrans %}:</b> {{ invoice.approvedByEmployee.name }}</p>
 
         <a href="{{ url('invoice.download', {id: invoice.id}) }}">
             <button type="button" class="btn btn-primary" title="{% trans %}Download{% endtrans %}">
