@@ -32,7 +32,7 @@ jobs:
                 cd /root/opt/mdshop
                 git reset --hard
                 git pull
-                docker-compose up -d webserver
+                docker-compose -f docker-compose.prod.yml up -d webserver
                 docker-compose up -d mysql
                 docker-compose -f docker-compose.prod.yml pull php-fpm
                 docker-compose -f docker-compose.prod.yml up -d --build --force-recreate php-fpm

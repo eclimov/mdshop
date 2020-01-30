@@ -17,7 +17,7 @@ services:
             dockerfile: docker/ci/nginx/Dockerfile
         container_name: mdshop-webserver
         ports:
-            - 80:80
+            - 8082:80
 
     php-fpm:
         build:
